@@ -817,20 +817,20 @@
         <div class="radio-dot"></div>
         <span>לא אותר</span>
       </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'נמצא')">
+        <input type="radio" name="location" value="נמצא"/>
+        <div class="radio-dot"></div>
+        <span>נמצא</span>
+      </label>
       <label class="radio-item" onclick="selectRadio('locationGroup',this,'נעדר')">
         <input type="radio" name="location" value="נעדר"/>
         <div class="radio-dot"></div>
-        <span>נעדר</span>
+        <span style="color:#e67e22;font-weight:700">נעדר</span>
       </label>
       <label class="radio-item" onclick="selectRadio('locationGroup',this,'לכוד')">
         <input type="radio" name="location" value="לכוד"/>
         <div class="radio-dot"></div>
         <span style="color:var(--accent);font-weight:700">לכוד</span>
-      </label>
-      <label class="radio-item" onclick="selectRadio('locationGroup',this,'נמצא')">
-        <input type="radio" name="location" value="נמצא"/>
-        <div class="radio-dot"></div>
-        <span>נמצא</span>
       </label>
     </div>
   </div>
@@ -843,10 +843,15 @@
         <div class="radio-dot"></div>
         <span>בריא</span>
       </label>
-      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פצוע')">
-        <input type="radio" name="healthStatus" value="פצוע"/>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפצע')">
+        <input type="radio" name="healthStatus" value="נפצע"/>
         <div class="radio-dot"></div>
-        <span style="color:#e67e22;font-weight:700">פצוע</span>
+        <span style="color:#e67e22;font-weight:700">נפצע</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפגע חרדה')">
+        <input type="radio" name="healthStatus" value="נפגע חרדה"/>
+        <div class="radio-dot"></div>
+        <span style="color:#8e44ad;font-weight:700">נפגע חרדה</span>
       </label>
       <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פונה')">
         <input type="radio" name="healthStatus" value="פונה"/>
@@ -868,13 +873,13 @@
         <input type="radio" name="damage" value="הדף"/>
         <div class="radio-dot"></div> הדף
       </label>
-      <label class="radio-item" onclick="selectRadio('damageGroup',this,'רסיסים בלבד')">
-        <input type="radio" name="damage" value="רסיסים בלבד"/>
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'רסיסים')">
+        <input type="radio" name="damage" value="רסיסים"/>
         <div class="radio-dot"></div> רסיסים בלבד
       </label>
-      <label class="radio-item" onclick="selectRadio('damageGroup',this,'נזקים לתשתיות - כמו תקרה וחשמל')">
-        <input type="radio" name="damage" value="נזקים לתשתיות"/>
-        <div class="radio-dot"></div> נזקים לתשתיות (תקרה, חשמל וכד׳)
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'נוקים')">
+        <input type="radio" name="damage" value="נוקים"/>
+        <div class="radio-dot"></div> תקום
       </label>
       <label class="radio-item" onclick="selectRadio('damageGroup',this,'הרס מוחלט')">
         <input type="radio" name="damage" value="הרס מוחלט"/>
@@ -904,13 +909,13 @@
           <input type="radio" name="hf" value="כללית"/>
           <div class="radio-dot"></div> כללית
         </label>
-        <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'מאוחדת')">
-          <input type="radio" name="hf" value="מאוחדת"/>
-          <div class="radio-dot"></div> מאוחדת
-        </label>
         <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'מכבי')">
           <input type="radio" name="hf" value="מכבי"/>
           <div class="radio-dot"></div> מכבי
+        </label>
+        <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'מאוחדת')">
+          <input type="radio" name="hf" value="מאוחדת"/>
+          <div class="radio-dot"></div> מאוחדת
         </label>
         <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'לאומית')">
           <input type="radio" name="hf" value="לאומית"/>
@@ -953,6 +958,10 @@
         <label class="radio-item" onclick="selectRadio('housingGroup',this,'צריכים סיוע')">
           <input type="radio" name="housing" value="צריכים סיוע"/>
           <div class="radio-dot"></div> צריכים סיוע
+        </label>
+        <label class="radio-item" onclick="selectRadio('housingGroup',this,'נחליט בהמשך')">
+          <input type="radio" name="housing" value="נחליט בהמשך"/>
+          <div class="radio-dot"></div> נחליט בהמשך
         </label>
       </div>
     </div>
@@ -1552,7 +1561,7 @@ function buildHousematesSection() {
         <div class="card" style="margin-bottom:10px;box-shadow:none;border:1.5px solid var(--border)">
           <div class="card-title" style="font-size:12px">💥 מידת הפגיעה</div>
           <div class="radio-group" id="nDamage_${i}">
-            ${['הדף','רסיסים בלבד','נזקים לתשתיות','הרס מוחלט'].map(v =>
+            ${['הדף','רסיסים','נוקים','הרס מוחלט'].map(v =>
               `<label class="radio-item" onclick="selectRadio('nDamage_${i}',this,'${v}')">
                 <input type="radio" name="nd${i}" value="${v}"/>
                 <div class="radio-dot"></div> ${v}
