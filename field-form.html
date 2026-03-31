@@ -1061,6 +1061,8 @@ function newResident() {
   state.isNew = true;
   state.housemates = [];
   clearForm();
+  const searchedId = document.getElementById('searchID').value.trim();
+  document.getElementById('identityNumber').value = searchedId;
   goToSection(1);
 }
 
