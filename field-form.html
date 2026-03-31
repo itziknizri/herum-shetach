@@ -643,13 +643,34 @@
         <input type="text" id="lastName" placeholder="שם משפחה"/>
       </div>
     </div>
-    <div class="field">
-      <label><span class="req">*</span> תעודת זהות</label>
-      <input type="text" id="identityNumber" readonly style="background:#f9f9f9;color:#666"/>
+    <div class="field-row">
+      <div class="field">
+        <label>תעודת זהות</label>
+        <input type="text" id="identityNumber" readonly style="background:#f0f4ff;color:#2B3A8F;font-weight:700"/>
+      </div>
+      <div class="field">
+        <label>גיל</label>
+        <input type="number" id="age" placeholder="גיל" inputmode="numeric" min="0" max="120"/>
+      </div>
     </div>
     <div class="field-row">
       <div class="field">
-        <label><span class="req">*</span> טלפון 1</label>
+        <label>מגדר</label>
+        <select id="gender">
+          <option value="">בחר...</option>
+          <option value="זכר">זכר</option>
+          <option value="נקבה">נקבה</option>
+          <option value="אחר">אחר</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>מס׳ ילדים כולל</label>
+        <input type="number" id="totalChildren" placeholder="0" inputmode="numeric" min="0"/>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>טלפון 1</label>
         <input type="tel" id="phone1" placeholder="05X-XXXXXXX" inputmode="tel"/>
       </div>
       <div class="field">
@@ -675,7 +696,7 @@
         <input type="text" id="houseNumber" placeholder="מספר" inputmode="numeric"/>
       </div>
       <div class="field">
-        <label><span class="req">*</span> קומה</label>
+        <label>קומה</label>
         <input type="number" id="floor" placeholder="0" inputmode="numeric" min="0"/>
       </div>
       <div class="field">
@@ -689,6 +710,59 @@
 
 <!-- ======= SECTION 2: QUESTIONNAIRE ======= -->
 <div class="section" id="sec2">
+
+  <div class="card">
+    <div class="card-title">📍 סטטוס מיקום</div>
+    <div class="radio-group" id="locationGroup">
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'לא אותר')">
+        <input type="radio" name="location" value="לא אותר"/>
+        <div class="radio-dot"></div>
+        <span>לא אותר</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'נעדר')">
+        <input type="radio" name="location" value="נעדר"/>
+        <div class="radio-dot"></div>
+        <span>נעדר</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'לכוד')">
+        <input type="radio" name="location" value="לכוד"/>
+        <div class="radio-dot"></div>
+        <span style="color:var(--accent);font-weight:700">לכוד</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'נמצא')">
+        <input type="radio" name="location" value="נמצא"/>
+        <div class="radio-dot"></div>
+        <span>נמצא</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏥 סטטוס בריאות</div>
+    <div class="radio-group" id="healthStatusGroup">
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'בריא')">
+        <input type="radio" name="healthStatus" value="בריא"/>
+        <div class="radio-dot"></div>
+        <span>בריא</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פצוע')">
+        <input type="radio" name="healthStatus" value="פצוע"/>
+        <div class="radio-dot"></div>
+        <span style="color:#e67e22;font-weight:700">פצוע</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פונה')">
+        <input type="radio" name="healthStatus" value="פונה"/>
+        <div class="radio-dot"></div>
+        <span>פונה</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפטר')">
+        <input type="radio" name="healthStatus" value="נפטר"/>
+        <div class="radio-dot"></div>
+        <span style="color:var(--accent);font-weight:700">נפטר</span>
+      </label>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-title">💥 מידת הפגיעה בבית</div>
     <div class="radio-group" id="damageGroup">
@@ -1113,14 +1187,18 @@ function fillFormFromRecord(r) {
   prefill('email', r.emailAddress || r.new_emailaddress || '');
   prefill('streetName', r.streetName || r.new_streetname || '');
   prefill('houseNumber', r.houseNumber || r.new_housenumber || '');
-  prefill('floor', r.floor !== undefined ? r.floor : (r.new_floor || ''));
+  prefill('floor', r.floor !== undefined ? r.floor : (r.new_floor !== undefined ? r.new_floor : ''));
   prefill('apartmentNumber', r.apartmentNumber || r.new_apartmentnumber || '');
+  prefill('age', r.age || r.new_age || '');
+  prefill('gender', r.gender || r.new_gender || '');
+  prefill('totalChildren', r.totalChildren || r.new_totalchildren || '');
 
   updateResidentCard(r, false);
 }
 
 function clearForm() {
   ['firstName','lastName','phone1','phone2','email','streetName','houseNumber','floor','apartmentNumber',
+   'age','gender','totalChildren',
    'evacuatedPersons','missingPersons','pets','additionalNeeds','vulnerableNeighbors','neighborDistress',
    'interviewerName'].forEach(id => {
     const el = document.getElementById(id);
@@ -1188,7 +1266,6 @@ function validateSection(sec) {
     const required = [
       { id: 'firstName', label: 'שם פרטי' },
       { id: 'lastName', label: 'שם משפחה' },
-      { id: 'phone1', label: 'טלפון 1' },
       { id: 'streetName', label: 'שם רחוב' },
       { id: 'houseNumber', label: 'מספר בית' }
     ];
@@ -1312,6 +1389,8 @@ function buildSummary() {
     ['ת"ז', document.getElementById('identityNumber').value],
     ['טלפון', document.getElementById('phone1').value],
     ['כתובת', `${document.getElementById('streetName').value} ${document.getElementById('houseNumber').value}, קומה ${document.getElementById('floor').value}, דירה ${document.getElementById('apartmentNumber').value}`],
+    ['סטטוס מיקום', getRadioValue('locationGroup') || '—'],
+    ['סטטוס בריאות', getRadioValue('healthStatusGroup') || '—'],
     ['מידת הפגיעה', getRadioValue('damageGroup') || '—'],
     ['קופ"ח', getRadioValue('healthFundGroup') || '—'],
     ['צורך רפואי', getRadioValue('medicalGroup') || '—'],
@@ -1348,7 +1427,12 @@ async function submitAll() {
     houseNumber: document.getElementById('houseNumber').value,
     floor: document.getElementById('floor').value,
     apartmentNumber: document.getElementById('apartmentNumber').value,
+    age: document.getElementById('age').value,
+    gender: document.getElementById('gender').value,
+    totalChildren: document.getElementById('totalChildren').value,
     interviewerName: document.getElementById('interviewerName').value,
+    locationStatus: getRadioValue('locationGroup'),
+    healthStatus: getRadioValue('healthStatusGroup'),
     damageLevel: getRadioValue('damageGroup'),
     evacuatedPersons: document.getElementById('evacuatedPersons').value,
     missingPersons: document.getElementById('missingPersons').value,
