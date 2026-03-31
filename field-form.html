@@ -540,7 +540,7 @@
       id="accessCodeInput"
       type="password"
       inputmode="numeric"
-      placeholder="קוד גישה"
+      placeholder="קוד גישה (9 ספרות)"
       autocomplete="off"
       style="
         width:100%;
@@ -798,14 +798,6 @@
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-title">📝 הערות</div>
-    <div class="field">
-      <label>הערות חופשיות</label>
-      <textarea id="notes" placeholder="הוסף כל מידע נוסף רלוונטי..." style="min-height:120px"></textarea>
-    </div>
-  </div>
-
   <div class="nav-buttons">
     <button class="btn btn-outline btn-back" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';">→ חיפוש</button>
     <button class="btn btn-primary btn-next" onclick="goNextWithWarning(1)">המשך לשאלון האירוע ←</button>
@@ -966,6 +958,13 @@
     <div class="field" style="margin-top:14px">
       <label>צרכים נוספים</label>
       <textarea id="additionalNeeds" placeholder="תאר צרכים נוספים..."></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 הערות</div>
+    <div class="field">
+      <textarea id="notes" placeholder="הוסף כל מידע נוסף רלוונטי..." style="min-height:120px"></textarea>
     </div>
   </div>
 
@@ -1135,7 +1134,7 @@ const CONFIG = {
 
   // קוד גישה — המשתמש מקליד אותו במסך הכניסה
   // שנה כאן כדי לעדכן את הקוד
-  ACCESS_CODE: '12345678'
+  ACCESS_CODE: '123456789'
 };
 
 // =============================================
@@ -1803,7 +1802,6 @@ function getEmptyFields(sec) {
   if (sec === 1) {
     const optional = [
       { id: 'phone1', label: 'טלפון 1' },
-      { id: 'phone2', label: 'טלפון 2' },
       { id: 'email', label: 'אימייל' },
       { id: 'age', label: 'גיל' },
       { id: 'gender', label: 'מגדר' },
@@ -1819,9 +1817,18 @@ function getEmptyFields(sec) {
     if (!getRadioValue('locationGroup')) emptyFields.push('סטטוס מיקום');
     if (!getRadioValue('healthStatusGroup')) emptyFields.push('סטטוס בריאות');
     if (!getRadioValue('damageGroup')) emptyFields.push('מידת הפגיעה');
+    const evac = document.getElementById('evacuatedPersons')?.value?.trim();
+    if (!evac) emptyFields.push('נפשות שפונו');
     if (!getRadioValue('healthFundGroup')) emptyFields.push('קופ"ח');
     if (!getRadioValue('medicalGroup')) emptyFields.push('צורך רפואי');
     if (!getRadioValue('housingGroup')) emptyFields.push('עזרה בשהייה');
+    const notes = document.getElementById('notes')?.value?.trim();
+    if (!notes) emptyFields.push('הערות');
+  } else if (sec === 3) {
+    const vuln = document.getElementById('vulnerableHousemates')?.value?.trim();
+    if (!vuln) emptyFields.push('בני בית עם מגבלות');
+    const dist = document.getElementById('houseMemberDistress')?.value?.trim();
+    if (!dist) emptyFields.push('סימני מצוקה בבני הבית');
   }
   return emptyFields;
 }
