@@ -32,6 +32,8 @@
     color: var(--dark);
     min-height: 100vh;
     padding-bottom: 40px;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   /* ===== HEADER ===== */
@@ -96,6 +98,9 @@
     display: none;
     padding: 16px;
     animation: fadeIn 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .section.active { display: block; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
@@ -149,6 +154,8 @@
     cursor: pointer;
     transition: all 0.2s;
     display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-sizing: border-box;
+    min-width: 0;
   }
   .btn-primary {
     background: #2B3A8F;
@@ -779,11 +786,11 @@
     </div>
   </div>
 
-  <div style="padding:16px;display:flex;gap:10px">
-    <button class="btn btn-outline" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+  <div style="padding:16px;display:flex;gap:12px;align-items:stretch;width:100%;box-sizing:border-box">
+    <button class="btn btn-outline" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
       → חיפוש
     </button>
-    <button class="btn btn-primary" onclick="goNextWithWarning(1)" style="flex:1;font-size:17px;padding:17px">
+    <button class="btn btn-primary" onclick="goNextWithWarning(1)" style="flex:1;font-size:18px;padding:20px 17px;min-height:60px;border-radius:14px">
       המשך לשאלון האירוע ←
     </button>
   </div>
@@ -957,11 +964,11 @@
       <textarea id="houseMemberDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
     </div>
   </div>
-  <div style="padding:16px;display:flex;gap:10px">
-    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+  <div style="padding:16px;display:flex;gap:12px;align-items:stretch;width:100%;box-sizing:border-box">
+    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
       → חזור
     </button>
-    <button class="btn btn-primary" onclick="goNextWithWarning(2)" style="flex:1;font-size:17px;padding:17px">
+    <button class="btn btn-primary" onclick="goNextWithWarning(2)" style="flex:1;font-size:18px;padding:20px 17px;min-height:60px;border-radius:14px">
       המשך לבני הבית ←
     </button>
   </div>
@@ -984,11 +991,11 @@
     <div style="font-size:36px; margin-bottom:10px">✅</div>
     <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
   </div>
-  <div style="padding:16px;display:flex;gap:10px">
-    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+  <div style="padding:16px;display:flex;gap:12px;align-items:stretch;width:100%;box-sizing:border-box">
+    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
       → חזור
     </button>
-    <button class="btn btn-primary" onclick="goNextWithWarning(3)" style="flex:1;font-size:17px;padding:17px">
+    <button class="btn btn-primary" onclick="goNextWithWarning(3)" style="flex:1;font-size:18px;padding:20px 17px;min-height:60px;border-radius:14px">
       המשך לאישור ←
     </button>
   </div>
@@ -1018,11 +1025,11 @@
     </div>
   </div>
 
-  <div style="padding:0 0 10px;display:flex;gap:10px">
-    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+  <div style="padding:0 0 10px;display:flex;gap:10px;width:100%;box-sizing:border-box">
+    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
       → חזור
     </button>
-    <button class="btn btn-success" onclick="submitAll()" id="btnSubmit" style="flex:1;font-size:18px;padding:18px">
+    <button class="btn btn-success" onclick="submitAll()" id="btnSubmit" style="flex:1;font-size:19px;padding:20px;min-height:60px;border-radius:14px">
       💾 שמור ושלח
     </button>
   </div>
