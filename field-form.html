@@ -1012,7 +1012,7 @@ async function searchResident() {
     const res = await fetch(CONFIG.SEARCH_FLOW_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'search', identityNumber: id, eventId: CONFIG.EVENT_ID })
+      body: JSON.stringify({ accessCode: CONFIG.ACCESS_CODE, action: 'search', identityNumber: id, eventId: CONFIG.EVENT_ID })
     });
     const data = await res.json();
     hideLoading();
@@ -1369,7 +1369,7 @@ async function submitAll() {
     await fetch(CONFIG.SAVE_FLOW_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({...payload, accessCode: CONFIG.ACCESS_CODE})
     });
     hideLoading();
   } catch(e) {
