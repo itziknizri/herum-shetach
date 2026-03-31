@@ -779,8 +779,11 @@
     </div>
   </div>
 
-  <div style="padding:16px">
-    <button class="btn btn-primary" onclick="goNextWithWarning(1)" style="font-size:17px;padding:17px">
+  <div style="padding:16px;display:flex;gap:10px">
+    <button class="btn btn-outline" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+      → חיפוש
+    </button>
+    <button class="btn btn-primary" onclick="goNextWithWarning(1)" style="flex:1;font-size:17px;padding:17px">
       המשך לשאלון האירוע ←
     </button>
   </div>
@@ -954,8 +957,11 @@
       <textarea id="houseMemberDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
     </div>
   </div>
-  <div style="padding:16px">
-    <button class="btn btn-primary" onclick="goNextWithWarning(2)" style="font-size:17px;padding:17px">
+  <div style="padding:16px;display:flex;gap:10px">
+    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+      → חזור
+    </button>
+    <button class="btn btn-primary" onclick="goNextWithWarning(2)" style="flex:1;font-size:17px;padding:17px">
       המשך לבני הבית ←
     </button>
   </div>
@@ -978,8 +984,11 @@
     <div style="font-size:36px; margin-bottom:10px">✅</div>
     <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
   </div>
-  <div style="padding:16px">
-    <button class="btn btn-primary" onclick="goNextWithWarning(3)" style="font-size:17px;padding:17px">
+  <div style="padding:16px;display:flex;gap:10px">
+    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+      → חזור
+    </button>
+    <button class="btn btn-primary" onclick="goNextWithWarning(3)" style="flex:1;font-size:17px;padding:17px">
       המשך לאישור ←
     </button>
   </div>
@@ -995,26 +1004,28 @@
 
   <div class="card">
     <div class="card-title">✅ אישורים</div>
-    <label class="confirm-item" id="conf1" onclick="toggleConfirm(this)">
-      <input type="checkbox"/>
-      <div class="confirm-check"></div>
+    <div class="confirm-item" id="conf1" onclick="toggleConfirm(this)">
+      <div class="confirm-check" id="check1"></div>
       <span>הקפדתי על סביבה רגועה ותומכת ועל כתיבה ברורה וקריאה</span>
-    </label>
-    <label class="confirm-item" id="conf2" onclick="toggleConfirm(this)">
-      <input type="checkbox"/>
-      <div class="confirm-check"></div>
+    </div>
+    <div class="confirm-item" id="conf2" onclick="toggleConfirm(this)">
+      <div class="confirm-check" id="check2"></div>
       <span>המידע שמולאו הוא מדויק ומבוסס על דברי התושב</span>
-    </label>
-    <label class="confirm-item" id="conf3" onclick="toggleConfirm(this)">
-      <input type="checkbox"/>
-      <div class="confirm-check"></div>
+    </div>
+    <div class="confirm-item" id="conf3" onclick="toggleConfirm(this)">
+      <div class="confirm-check" id="check3"></div>
       <span>במידה ועלה נושא מס רכוש — הפניתי למילוי טופס מקוון</span>
-    </label>
+    </div>
   </div>
 
-  <button class="btn btn-success" onclick="submitAll()" id="btnSubmit">
-    💾 שמור ושלח
-  </button>
+  <div style="padding:0 0 10px;display:flex;gap:10px">
+    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:17px 20px;font-size:15px">
+      → חזור
+    </button>
+    <button class="btn btn-success" onclick="submitAll()" id="btnSubmit" style="flex:1;font-size:18px;padding:18px">
+      💾 שמור ושלח
+    </button>
+  </div>
   <div class="footer-spacer"></div>
 </div>
 
@@ -1429,14 +1440,17 @@ function getRadioValue(groupId) {
 
 function toggleConfirm(el) {
   el.classList.toggle('checked');
-  const cb = el.querySelector('input[type=checkbox]');
   const check = el.querySelector('.confirm-check');
   if (el.classList.contains('checked')) {
-    cb.checked = true;
     check.textContent = '✓';
+    check.style.background = 'var(--green)';
+    check.style.borderColor = 'var(--green)';
+    check.style.color = 'white';
   } else {
-    cb.checked = false;
     check.textContent = '';
+    check.style.background = '';
+    check.style.borderColor = '';
+    check.style.color = '';
   }
 }
 
@@ -1819,7 +1833,13 @@ function resetAll() {
   document.querySelectorAll('.radio-item').forEach(r => r.classList.remove('selected'));
   document.querySelectorAll('.confirm-item').forEach(c => {
     c.classList.remove('checked');
-    c.querySelector('.confirm-check').textContent = '';
+    const check = c.querySelector('.confirm-check');
+    if (check) {
+      check.textContent = '';
+      check.style.background = '';
+      check.style.borderColor = '';
+      check.style.color = '';
+    }
   });
   goToSection(0);
 }
