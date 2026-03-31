@@ -1291,20 +1291,26 @@ async function searchResident() {
       state.isNew = false;
       // המרת אובייקטי Dataverse גולמיים לפורמט פשוט
       const rawNeighbors = data.neighbors || data.housemates || [];
-      state.housemates = rawNeighbors.map(n => ({
-        recordId: n.new_individualdemographicrecordid || n.recordId,
-        fullName: n.new_fullname || n.fullName || '',
-        identityNumber: n.new_identitynumber || n.identityNumber || '',
-        streetName: n.new_streetname || '',
-        houseNumber: n.new_housenumber || '',
-        apartmentNumber: n.new_apartmentnumber || '',
-        floor: n.new_floor || '',
-        primaryPhone: n.new_primaryphone || '',
-        age: n.new_age || '',
-        gender: n.new_gender || '',
-        locationStatus: n['cr908_new_locationstatus@OData.Community.Display.V1.FormattedValue'] || '',
-        healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || '',
-      }));
+      state.housemates = rawNeighbors.map(n => {
+        // Dataverse מחזיר שדות עם @odata.type לפני ה-GUID
+        // צריך לחפש את השדה ישירות בלי ה-annotation
+        const recordId = n['new_individualdemographicrecordid'] || n.recordId || '';
+        return {
+          recordId,
+          fullName: n['new_fullname'] || n.fullName || 'לא ידוע',
+          identityNumber: n['new_identitynumber'] || n.identityNumber || '',
+          streetName: (n['new_streetname'] || '').trim(),
+          houseNumber: n['new_housenumber'] || '',
+          apartmentNumber: n['new_apartmentnumber'] || '',
+          floor: n['new_floor'] || '',
+          primaryPhone: n['new_primaryphone'] || '',
+          age: n['new_age'] || '',
+          gender: n['new_gender'] || '',
+          locationStatus: n['cr908_new_locationstatus@OData.Community.Display.V1.FormattedValue'] || '',
+          healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || '',
+        };
+      });
+      console.log('בני בית שנמצאו:', state.housemates.length, state.housemates);
       fillFormFromRecord(data.record);
       showToast('תושב נמצא: ' + data.record.fullName, 'success');
     } else {
