@@ -1289,7 +1289,22 @@ async function searchResident() {
     if (data.found) {
       state.record = data.record;
       state.isNew = false;
-      state.housemates = data.housemates || [];
+      // המרת אובייקטי Dataverse גולמיים לפורמט פשוט
+      const rawNeighbors = data.neighbors || data.housemates || [];
+      state.housemates = rawNeighbors.map(n => ({
+        recordId: n.new_individualdemographicrecordid || n.recordId,
+        fullName: n.new_fullname || n.fullName || '',
+        identityNumber: n.new_identitynumber || n.identityNumber || '',
+        streetName: n.new_streetname || '',
+        houseNumber: n.new_housenumber || '',
+        apartmentNumber: n.new_apartmentnumber || '',
+        floor: n.new_floor || '',
+        primaryPhone: n.new_primaryphone || '',
+        age: n.new_age || '',
+        gender: n.new_gender || '',
+        locationStatus: n['cr908_new_locationstatus@OData.Community.Display.V1.FormattedValue'] || '',
+        healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || '',
+      }));
       fillFormFromRecord(data.record);
       showToast('תושב נמצא: ' + data.record.fullName, 'success');
     } else {
@@ -1512,10 +1527,10 @@ function buildHousematesSection() {
   document.getElementById('housematesSubtitle').textContent = 'אנא בדוק את שלומם וענה על השאלות עבורם';
 
   state.housemates.forEach((n, i) => {
-    const id = n.recordId || n.id || i;
-    const name = n.fullName || n.new_fullname || 'לא ידוע';
+    const id = n.new_individualdemographicrecordid || n.recordId || n.id || i;
+    const name = n.new_fullname || n.fullName || 'לא ידוע';
     const initials = name.split(' ').map(w=>w[0]).filter(Boolean).slice(0,2).join('');
-    const idNum = n.identityNumber || n.new_identitynumber || '';
+    const idNum = n.new_identitynumber || n.identityNumber || '';
 
     const div = document.createElement('div');
     div.className = 'houseMember-card';
