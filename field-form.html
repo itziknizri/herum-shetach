@@ -484,6 +484,30 @@
 
   /* Spacer for fixed footer */
   .footer-spacer { height: 80px; }
+
+  /* כפתורי ניווט */
+  .nav-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .nav-buttons .btn {
+    margin: 0 !important;
+    width: auto !important;
+  }
+  .nav-buttons .btn-back {
+    flex: 0 0 80px !important;
+    padding: 16px 12px !important;
+    font-size: 14px !important;
+  }
+  .nav-buttons .btn-next {
+    flex: 1 1 auto !important;
+    padding: 16px !important;
+    font-size: 16px !important;
+  }
 </style>
 </head>
 <body>
@@ -786,13 +810,9 @@
     </div>
   </div>
 
-  <div style="padding:16px;display:flex;gap:12px;align-items:stretch;width:100%;box-sizing:border-box">
-    <button class="btn btn-outline" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
-      → חיפוש
-    </button>
-    <button class="btn btn-primary" onclick="goNextWithWarning(1)" style="flex:1;font-size:18px;padding:20px 17px;min-height:60px;border-radius:14px">
-      המשך לשאלון האירוע ←
-    </button>
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';">→ חיפוש</button>
+    <button class="btn btn-primary btn-next" onclick="goNextWithWarning(1)">המשך לשאלון האירוע ←</button>
   </div>
   <div class="footer-spacer"></div>
 </div>
@@ -964,13 +984,9 @@
       <textarea id="houseMemberDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
     </div>
   </div>
-  <div style="padding:16px;display:flex;gap:12px;align-items:stretch;width:100%;box-sizing:border-box">
-    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
-      → חזור
-    </button>
-    <button class="btn btn-primary" onclick="goNextWithWarning(2)" style="flex:1;font-size:18px;padding:20px 17px;min-height:60px;border-radius:14px">
-      המשך לבני הבית ←
-    </button>
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
+    <button class="btn btn-primary btn-next" onclick="goNextWithWarning(2)">המשך לבני הבית ←</button>
   </div>
   <div class="footer-spacer"></div>
 </div>
@@ -991,13 +1007,9 @@
     <div style="font-size:36px; margin-bottom:10px">✅</div>
     <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
   </div>
-  <div style="padding:16px;display:flex;gap:12px;align-items:stretch;width:100%;box-sizing:border-box">
-    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
-      → חזור
-    </button>
-    <button class="btn btn-primary" onclick="goNextWithWarning(3)" style="flex:1;font-size:18px;padding:20px 17px;min-height:60px;border-radius:14px">
-      המשך לאישור ←
-    </button>
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
+    <button class="btn btn-primary btn-next" onclick="goNextWithWarning(3)">המשך לאישור ←</button>
   </div>
   <div class="footer-spacer"></div>
 </div>
@@ -1025,13 +1037,9 @@
     </div>
   </div>
 
-  <div style="padding:0 0 10px;display:flex;gap:10px;width:100%;box-sizing:border-box">
-    <button class="btn btn-outline" onclick="goBack()" style="flex:0 0 auto;padding:20px 22px;font-size:16px;min-height:60px;border-radius:14px">
-      → חזור
-    </button>
-    <button class="btn btn-success" onclick="submitAll()" id="btnSubmit" style="flex:1;font-size:19px;padding:20px;min-height:60px;border-radius:14px">
-      💾 שמור ושלח
-    </button>
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
+    <button class="btn btn-success btn-next" onclick="submitAll()" id="btnSubmit">💾 שמור ושלח</button>
   </div>
   <div class="footer-spacer"></div>
 </div>
