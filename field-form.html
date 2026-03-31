@@ -36,7 +36,6 @@
     width: 100%;
   }
 
-  /* ===== HEADER ===== */
   .header {
     background: linear-gradient(135deg, #2B3A8F 0%, #1a2970 100%);
     color: white;
@@ -68,7 +67,6 @@
   .event-dot { width: 7px; height: 7px; background: #ff6b6b; border-radius: 50%; animation: pulse 1.5s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
 
-  /* ===== STEPS BAR ===== */
   .steps-bar {
     background: white;
     padding: 12px 20px;
@@ -93,7 +91,6 @@
   .step-item.done .step-num { background: var(--green); color: white; }
   .step-arrow { color: var(--border); font-size: 14px; flex-shrink: 0; }
 
-  /* ===== SECTIONS ===== */
   .section {
     display: none;
     padding: 16px;
@@ -105,7 +102,6 @@
   .section.active { display: block; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-  /* ===== SEARCH SCREEN ===== */
   .search-card {
     background: white;
     border-radius: var(--radius);
@@ -118,16 +114,11 @@
   .search-card h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
   .search-card p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
 
-  .id-input-wrap {
-    position: relative;
-    margin-bottom: 16px;
-  }
+  .id-input-wrap { position: relative; margin-bottom: 16px; }
   .id-input-wrap input {
     width: 100%;
-    font-size: 28px;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: 4px;
+    font-size: 28px; font-weight: 700;
+    text-align: center; letter-spacing: 4px;
     padding: 18px 16px;
     border: 2.5px solid var(--border);
     border-radius: var(--radius);
@@ -137,66 +128,34 @@
     background: var(--light);
   }
   .id-input-wrap input:focus {
-    outline: none;
-    border-color: #2B3A8F;
-    background: white;
+    outline: none; border-color: #2B3A8F; background: white;
   }
 
-  /* ===== BUTTONS ===== */
   .btn {
-    width: 100%;
-    padding: 16px;
-    border: none;
+    width: 100%; padding: 16px; border: none;
     border-radius: var(--radius);
     font-family: 'Assistant', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+    font-size: 16px; font-weight: 700; cursor: pointer;
     transition: all 0.2s;
     display: flex; align-items: center; justify-content: center; gap: 8px;
-    box-sizing: border-box;
-    min-width: 0;
+    box-sizing: border-box; min-width: 0;
   }
-  .btn-primary {
-    background: #2B3A8F;
-    color: white;
-  }
+  .btn-primary { background: #2B3A8F; color: white; }
   .btn-primary:active { transform: scale(0.98); background: var(--mid); }
-  .btn-danger {
-    background: #e63946;
-    color: white;
-  }
+  .btn-danger { background: #e63946; color: white; }
   .btn-danger:active { transform: scale(0.98); }
-  .btn-success {
-    background: var(--green);
-    color: white;
-    font-size: 18px;
-    padding: 18px;
-  }
-  .btn-outline {
-    background: transparent;
-    border: 2px solid var(--border);
-    color: var(--gray);
-  }
-  .btn-sm {
-    width: auto;
-    padding: 10px 20px;
-    font-size: 14px;
-  }
+  .btn-success { background: var(--green); color: white; font-size: 18px; padding: 18px; }
+  .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--gray); }
+  .btn-sm { width: auto; padding: 10px 20px; font-size: 14px; }
 
-  /* ===== RESIDENT CARD ===== */
   .resident-card {
-    background: white;
-    border-radius: var(--radius);
-    padding: 0;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    margin-bottom: 16px;
+    background: white; border-radius: var(--radius);
+    padding: 0; overflow: hidden;
+    box-shadow: var(--shadow); margin-bottom: 16px;
   }
   .resident-card-header {
     background: linear-gradient(135deg, #2B3A8F, #1a2970);
-    color: white;
-    padding: 16px;
+    color: white; padding: 16px;
     display: flex; align-items: center; gap: 12px;
   }
   .resident-avatar {
@@ -204,15 +163,13 @@
     background: rgba(255,255,255,0.15);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px; font-weight: 800;
-    flex-shrink: 0;
+    font-size: 20px; font-weight: 800; flex-shrink: 0;
     border: 2px solid rgba(255,255,255,0.3);
   }
   .resident-name { font-size: 18px; font-weight: 800; }
   .resident-id { font-size: 12px; opacity: 0.7; margin-top: 2px; }
   .resident-status-row {
-    padding: 10px 16px;
-    background: var(--light);
+    padding: 10px 16px; background: var(--light);
     display: flex; gap: 8px; align-items: center;
   }
   .status-chip {
@@ -223,137 +180,86 @@
   .chip-new { background: #fef3c7; color: #92400e; }
   .chip-found { background: #d1fae5; color: #065f46; }
 
-  /* ===== CARDS ===== */
   .card {
-    background: white;
-    border-radius: var(--radius);
-    padding: 18px;
-    box-shadow: var(--shadow);
-    margin-bottom: 14px;
+    background: white; border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow); margin-bottom: 14px;
   }
   .card-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 13px; font-weight: 700; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.5px;
     margin-bottom: 14px;
     display: flex; align-items: center; gap: 8px;
   }
-  .card-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* ===== FORM FIELDS ===== */
   .field { margin-bottom: 14px; }
-  .field label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--mid);
-    margin-bottom: 6px;
-  }
+  .field label { display: block; font-size: 13px; font-weight: 600; color: var(--mid); margin-bottom: 6px; }
   .field label .req { color: var(--red); margin-right: 2px; }
   .field input, .field select, .field textarea {
-    width: 100%;
-    padding: 13px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'Assistant', sans-serif;
-    font-size: 16px;
-    color: var(--dark);
-    background: white;
+    width: 100%; padding: 13px 14px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'Assistant', sans-serif; font-size: 16px;
+    color: var(--dark); background: white;
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
   }
   .field input:focus, .field select:focus, .field textarea:focus {
-    outline: none;
-    border-color: #2B3A8F;
+    outline: none; border-color: #2B3A8F;
     box-shadow: 0 0 0 3px rgba(43,58,143,0.12);
   }
-  .field input.prefilled {
-    background: #eef2ff;
-    border-color: #93a8e8;
-    color: #2B3A8F;
-    font-weight: 600;
-  }
+  .field input.prefilled { background: #eef2ff; border-color: #93a8e8; color: #2B3A8F; font-weight: 600; }
   .field textarea { resize: none; min-height: 80px; }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .field-row-3 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; }
 
-  /* ===== RADIO GROUPS ===== */
   .radio-group { display: flex; flex-direction: column; gap: 8px; }
   .radio-group.horizontal { flex-direction: row; flex-wrap: wrap; }
   .radio-item {
     display: flex; align-items: center; gap: 10px;
-    padding: 12px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-size: 15px;
-    font-weight: 500;
+    padding: 12px 14px; border: 1.5px solid var(--border);
+    border-radius: 10px; cursor: pointer;
+    transition: all 0.15s; font-size: 15px; font-weight: 500;
   }
   .radio-item:active { transform: scale(0.99); }
   .radio-item input[type=radio] { display: none; }
   .radio-dot {
-    width: 20px; height: 20px;
-    border: 2px solid var(--border);
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: all 0.15s;
+    width: 20px; height: 20px; border: 2px solid var(--border);
+    border-radius: 50%; flex-shrink: 0; transition: all 0.15s;
     display: flex; align-items: center; justify-content: center;
   }
-  .radio-item.selected {
-    border-color: #2B3A8F;
-    background: var(--light);
-  }
+  .radio-item.selected { border-color: #2B3A8F; background: var(--light); }
   .radio-item.selected .radio-dot {
-    border-color: #2B3A8F;
-    background: #2B3A8F;
+    border-color: #2B3A8F; background: #2B3A8F;
     box-shadow: inset 0 0 0 3px white;
   }
   .radio-group.horizontal .radio-item {
     flex: 1; min-width: 80px;
     flex-direction: column; gap: 6px;
-    text-align: center; padding: 12px 8px;
-    font-size: 13px;
+    text-align: center; padding: 12px 8px; font-size: 13px;
   }
   .radio-group.horizontal .radio-dot { margin: 0 auto; }
 
-  /* ===== CONFIRM CHECKBOX ===== */
   .confirm-item {
     display: flex; align-items: flex-start; gap: 12px;
-    padding: 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    transition: all 0.15s;
-    font-size: 14px;
-    line-height: 1.5;
+    padding: 14px; border: 1.5px solid var(--border);
+    border-radius: 10px; cursor: pointer;
+    margin-bottom: 8px; transition: all 0.15s;
+    font-size: 14px; line-height: 1.5;
   }
   .confirm-item input[type=checkbox] { display: none; }
   .confirm-check {
     width: 22px; height: 22px; min-width: 22px;
-    border: 2px solid var(--border);
-    border-radius: 6px;
+    border: 2px solid var(--border); border-radius: 6px;
     display: flex; align-items: center; justify-content: center;
     font-size: 14px; transition: all 0.15s;
   }
   .confirm-item.checked { border-color: var(--green); background: #f0fdf4; }
   .confirm-item.checked .confirm-check { background: var(--green); border-color: var(--green); color: white; }
 
-  /* ===== NEIGHBORS SECTION ===== */
   .housemates-banner {
     background: linear-gradient(135deg, #2B3A8F, #1a2970);
-    color: white;
-    border-radius: var(--radius);
-    padding: 18px;
-    margin-bottom: 14px;
+    color: white; border-radius: var(--radius);
+    padding: 18px; margin-bottom: 14px;
     display: flex; gap: 14px; align-items: flex-start;
   }
   .housemates-banner-icon { font-size: 28px; flex-shrink: 0; }
@@ -361,53 +267,35 @@
   .housemates-banner p { font-size: 13px; opacity: 0.8; }
 
   .houseMember-card {
-    background: white;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    margin-bottom: 12px;
-    border: 2px solid transparent;
+    background: white; border-radius: var(--radius);
+    overflow: hidden; box-shadow: var(--shadow);
+    margin-bottom: 12px; border: 2px solid transparent;
     transition: border-color 0.2s;
   }
   .houseMember-card.answered { border-color: var(--green); }
   .houseMember-card-header {
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 12px;
-    background: var(--light);
-    cursor: pointer;
+    padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+    background: var(--light); cursor: pointer;
   }
   .houseMember-avatar {
-    width: 38px; height: 38px;
-    background: #2B3A8F;
-    color: white;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 800;
-    flex-shrink: 0;
+    width: 38px; height: 38px; background: #2B3A8F; color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; flex-shrink: 0;
   }
   .houseMember-name { font-size: 15px; font-weight: 700; }
   .houseMember-id { font-size: 12px; color: var(--gray); }
-  .houseMember-expand {
-    margin-right: auto;
-    font-size: 18px;
-    color: var(--gray);
-    transition: transform 0.2s;
-  }
+  .houseMember-expand { margin-right: auto; font-size: 18px; color: var(--gray); transition: transform 0.2s; }
   .houseMember-card.open .houseMember-expand { transform: rotate(180deg); }
   .houseMember-body { display: none; padding: 16px; }
   .houseMember-card.open .houseMember-body { display: block; }
 
-  /* ===== TOAST ===== */
   .toast {
-    position: fixed;
-    top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px);
+    position: fixed; top: 20px; left: 50%;
+    transform: translateX(-50%) translateY(-80px);
     background: #2B3A8F; color: white;
-    padding: 14px 22px;
-    border-radius: 30px;
-    font-size: 14px; font-weight: 600;
-    z-index: 9999;
-    transition: transform 0.3s ease;
-    white-space: nowrap;
+    padding: 14px 22px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; z-index: 9999;
+    transition: transform 0.3s ease; white-space: nowrap;
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
     display: flex; align-items: center; gap: 8px;
   }
@@ -415,12 +303,9 @@
   .toast.error { background: #e63946; }
   .toast.success { background: var(--green); }
 
-  /* ===== LOADING ===== */
   .loading-overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(26,26,46,0.7);
-    z-index: 500;
+    display: none; position: fixed; inset: 0;
+    background: rgba(26,26,46,0.7); z-index: 500;
     align-items: center; justify-content: center;
     flex-direction: column; gap: 16px;
   }
@@ -428,176 +313,90 @@
   .spinner {
     width: 44px; height: 44px;
     border: 4px solid rgba(255,255,255,0.2);
-    border-top-color: white;
-    border-radius: 50%;
+    border-top-color: white; border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { color: white; font-size: 16px; font-weight: 600; }
 
-  /* ===== NAV FOOTER ===== */
   .nav-footer {
     position: fixed; bottom: 0; left: 0; right: 0;
-    background: white;
-    border-top: 1px solid var(--border);
-    padding: 12px 16px;
-    display: flex; gap: 10px;
-    z-index: 99;
+    background: white; border-top: 1px solid var(--border);
+    padding: 12px 16px; display: flex; gap: 10px; z-index: 99;
   }
   .nav-footer .btn { flex: 1; padding: 14px; }
 
-  /* SUCCESS SCREEN */
-  .success-screen {
-    text-align: center;
-    padding: 40px 20px;
-  }
+  .success-screen { text-align: center; padding: 40px 20px; }
   .success-icon { font-size: 64px; margin-bottom: 16px; animation: bounce 0.6s ease; }
   @keyframes bounce { 0%{transform:scale(0)} 60%{transform:scale(1.2)} 100%{transform:scale(1)} }
-  @keyframes slideUp {
-    from { transform: translateY(100px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+  @keyframes slideUp { from{transform:translateY(100px);opacity:0} to{transform:translateY(0);opacity:1} }
   @keyframes shake {
-    0%,100%{transform:translateX(0)}
-    20%{transform:translateX(-10px)}
-    40%{transform:translateX(10px)}
-    60%{transform:translateX(-6px)}
-    80%{transform:translateX(6px)}
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-10px)}
+    40%{transform:translateX(10px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)}
   }
   .success-screen h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
   .success-screen p { font-size: 15px; color: var(--gray); margin-bottom: 28px; }
-  .summary-box {
-    background: var(--light);
-    border-radius: var(--radius);
-    padding: 18px;
-    text-align: right;
-    margin-bottom: 20px;
-  }
-  .summary-row {
-    display: flex; justify-content: space-between;
-    padding: 6px 0;
-    font-size: 14px;
-    border-bottom: 1px solid var(--border);
-  }
+  .summary-box { background: var(--light); border-radius: var(--radius); padding: 18px; text-align: right; margin-bottom: 20px; }
+  .summary-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; border-bottom: 1px solid var(--border); }
   .summary-row:last-child { border: none; }
   .summary-row strong { color: var(--dark); }
 
-  /* Spacer for fixed footer */
   .footer-spacer { height: 80px; }
 
-  /* כפתורי ניווט */
   .nav-buttons {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 10px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+    display: flex !important; flex-direction: row !important;
+    gap: 10px !important; padding: 16px !important;
+    width: 100% !important; box-sizing: border-box !important;
   }
-  .nav-buttons .btn {
-    margin: 0 !important;
-    width: auto !important;
-  }
-  .nav-buttons .btn-back {
-    flex: 0 0 80px !important;
-    padding: 16px 12px !important;
-    font-size: 14px !important;
-  }
-  .nav-buttons .btn-next {
-    flex: 1 1 auto !important;
-    padding: 16px !important;
-    font-size: 16px !important;
-  }
+  .nav-buttons .btn { margin: 0 !important; width: auto !important; }
+  .nav-buttons .btn-back { flex: 0 0 80px !important; padding: 16px 12px !important; font-size: 14px !important; }
+  .nav-buttons .btn-next { flex: 1 1 auto !important; padding: 16px !important; font-size: 16px !important; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <!-- ======= LOGIN SCREEN ======= -->
 <div id="loginScreen" style="
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
-  min-height:100vh; background:#2B3A8F;
-  padding:24px;
+  min-height:100vh; background:#2B3A8F; padding:24px;
 ">
   <div id="loginCard" style="
-    background:#1a2970;
-    border-radius:20px;
-    padding:36px 28px;
-    width:100%; max-width:360px;
-    text-align:center;
+    background:#1a2970; border-radius:20px; padding:36px 28px;
+    width:100%; max-width:360px; text-align:center;
     box-shadow:0 20px 60px rgba(0,0,0,0.4);
     border:1px solid rgba(255,255,255,0.08);
   ">
     <div style="font-size:52px; margin-bottom:16px">🔐</div>
-    <h1 style="color:white; font-size:22px; font-weight:800; margin-bottom:8px; font-family:'Assistant',sans-serif">
+    <h1 style="color:white;font-size:22px;font-weight:800;margin-bottom:8px;font-family:'Assistant',sans-serif">
       מערכת חירום — שטח
     </h1>
-    <p style="color:rgba(255,255,255,0.55); font-size:14px; margin-bottom:28px; font-family:'Assistant',sans-serif; line-height:1.5">
+    <p style="color:rgba(255,255,255,0.55);font-size:14px;margin-bottom:28px;font-family:'Assistant',sans-serif;line-height:1.5">
       הכנס את קוד הגישה שקיבלת<br>מהמוקדן כדי להמשיך
     </p>
-    <input
-      id="accessCodeInput"
-      type="password"
-      inputmode="numeric"
-      placeholder="קוד גישה"
-      autocomplete="off"
-      style="
-        width:100%;
-        padding:16px;
-        font-size:22px;
-        font-weight:700;
-        text-align:center;
-        letter-spacing:6px;
-        background:rgba(255,255,255,0.07);
-        border:2px solid rgba(255,255,255,0.15);
-        border-radius:12px;
-        color:white;
-        font-family:'Assistant',sans-serif;
-        margin-bottom:12px;
-        transition:border-color 0.2s;
-        outline:none;
-      "
+    <input id="accessCodeInput" type="password" inputmode="numeric" placeholder="קוד גישה" autocomplete="off"
+      style="width:100%;padding:16px;font-size:22px;font-weight:700;text-align:center;letter-spacing:6px;
+        background:rgba(255,255,255,0.07);border:2px solid rgba(255,255,255,0.15);border-radius:12px;
+        color:white;font-family:'Assistant',sans-serif;margin-bottom:12px;transition:border-color 0.2s;outline:none;"
       onfocus="this.style.borderColor='rgba(255,255,255,0.5)'"
       onblur="this.style.borderColor='rgba(255,255,255,0.15)'"
     />
-    <div id="loginError" style="
-      display:none;
-      color:#ff6b6b;
-      font-size:13px;
-      font-family:'Assistant',sans-serif;
-      font-weight:600;
-      margin-bottom:12px;
-      padding:10px;
-      background:rgba(192,57,43,0.2);
-      border-radius:8px;
-      border:1px solid rgba(192,57,43,0.3);
-    "></div>
-    <button
-      id="btnLogin"
-      onclick="submitAccessCode()"
-      style="
-        width:100%;
-        padding:16px;
-        background:#2B3A8F;
-        color:white;
-        border:none;
-        border-radius:12px;
-        font-size:16px;
-        font-weight:700;
-        font-family:'Assistant',sans-serif;
-        cursor:pointer;
-        transition:background 0.2s;
-      "
-      onmousedown="this.style.background='#1a2970'"
-      onmouseup="this.style.background='#2B3A8F'"
-    >כניסה למערכת ←</button>
-    <p style="color:rgba(255,255,255,0.25); font-size:11px; margin-top:20px; font-family:'Assistant',sans-serif">
+    <div id="loginError" style="display:none;color:#ff6b6b;font-size:13px;font-family:'Assistant',sans-serif;
+      font-weight:600;margin-bottom:12px;padding:10px;background:rgba(192,57,43,0.2);
+      border-radius:8px;border:1px solid rgba(192,57,43,0.3);"></div>
+    <button id="btnLogin" onclick="submitAccessCode()" style="width:100%;padding:16px;background:#2B3A8F;
+      color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;
+      font-family:'Assistant',sans-serif;cursor:pointer;transition:background 0.2s;"
+      onmousedown="this.style.background='#1a2970'" onmouseup="this.style.background='#2B3A8F'">
+      כניסה למערכת ←
+    </button>
+    <p style="color:rgba(255,255,255,0.25);font-size:11px;margin-top:20px;font-family:'Assistant',sans-serif">
       עיריית לוד — מערכת ניהול חירום
     </p>
   </div>
 </div>
 
+<!-- HEADER -->
 <div class="header">
   <div class="header-top">
     <div class="header-icon">🚨</div>
@@ -606,81 +405,48 @@
       <p>עיריית לוד — מערכת חירום</p>
     </div>
   </div>
-  <div style="display:flex; align-items:center; justify-content:space-between; margin-top:10px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
     <div class="event-badge">
       <div class="event-dot"></div>
       <span id="eventLabel">טוען אירוע...</span>
     </div>
     <button id="searchToggleBtn" onclick="toggleSearchBar()" style="
-      display:none;
-      background:rgba(255,255,255,0.15);
-      border:1px solid rgba(255,255,255,0.25);
-      border-radius:20px;
-      color:white;
-      padding:6px 14px;
-      font-size:13px;
-      font-family:'Assistant',sans-serif;
-      cursor:pointer;
-      display:flex; align-items:center; gap:6px;
-    " title="חיפוש תושב חדש">
+      display:none; background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25); border-radius:20px;
+      color:white; padding:6px 14px; font-size:13px;
+      font-family:'Assistant',sans-serif; cursor:pointer;
+      align-items:center; gap:6px;" title="חיפוש תושב חדש">
       🔍 <span id="currentResidentName">חיפוש תושב</span>
     </button>
   </div>
-  
-  <!-- פאנל חיפוש מתקפל -->
-  <div id="searchPanel" style="
-    display:none;
-    padding:12px 0 4px;
-    animation: fadeIn 0.2s ease;
-  ">
-    <div style="display:flex; gap:8px;">
-      <input type="number" id="quickSearchID" placeholder="הכנס ת&quot;ז..." 
+  <div id="searchPanel" style="display:none;padding:12px 0 4px;animation:fadeIn 0.2s ease;">
+    <div style="display:flex;gap:8px;">
+      <input type="number" id="quickSearchID" placeholder="הכנס ת&quot;ז..."
         inputmode="numeric" maxlength="9"
         oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
         onkeydown="if(event.key==='Enter') quickSearch()"
-        style="
-          flex:1; padding:10px 14px;
-          background:rgba(255,255,255,0.1);
-          border:1.5px solid rgba(255,255,255,0.3);
-          border-radius:10px; color:white;
-          font-size:16px; font-family:'Assistant',sans-serif;
-          outline:none;
-        "/>
-      <button onclick="quickSearch()" style="
-        background:white; color:#2B3A8F;
-        border:none; border-radius:10px;
-        padding:10px 16px; font-weight:700;
-        font-family:'Assistant',sans-serif;
-        font-size:14px; cursor:pointer;
-      ">חפש</button>
-      <button onclick="toggleSearchBar()" style="
-        background:rgba(255,255,255,0.1);
-        border:1px solid rgba(255,255,255,0.2);
-        border-radius:10px; color:white;
-        padding:10px 12px; cursor:pointer;
-        font-size:16px;
-      ">✕</button>
+        style="flex:1;padding:10px 14px;background:rgba(255,255,255,0.1);
+          border:1.5px solid rgba(255,255,255,0.3);border-radius:10px;color:white;
+          font-size:16px;font-family:'Assistant',sans-serif;outline:none;"/>
+      <button onclick="quickSearch()" style="background:white;color:#2B3A8F;border:none;
+        border-radius:10px;padding:10px 16px;font-weight:700;font-family:'Assistant',sans-serif;
+        font-size:14px;cursor:pointer;">חפש</button>
+      <button onclick="toggleSearchBar()" style="background:rgba(255,255,255,0.1);
+        border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:white;
+        padding:10px 12px;cursor:pointer;font-size:16px;">✕</button>
     </div>
   </div>
 </div>
 
 <!-- STEPS BAR -->
 <div class="steps-bar" id="stepsBar" style="display:none">
-  <div class="step-item" id="step1item">
-    <div class="step-num">1</div> פרטים
-  </div>
+  <div class="step-item" id="step1item"><div class="step-num">1</div> פרטים</div>
   <div class="step-arrow">›</div>
-  <div class="step-item" id="step2item">
-    <div class="step-num">2</div> שאלון
-  </div>
+  <div class="step-item" id="step2item"><div class="step-num">2</div> שאלון</div>
   <div class="step-arrow">›</div>
-  <div class="step-item" id="step3item">
-    <div class="step-num">3</div> בני בית
-  </div>
+  <div class="step-item" id="step3item"><div class="step-num">3</div> בני בית</div>
   <div class="step-arrow">›</div>
-  <div class="step-item" id="step4item">
-    <div class="step-num">4</div> אישור
-  </div>
+  <div class="step-item" id="step4item"><div class="step-num">4</div> אישור</div>
 </div>
 
 <!-- ======= SECTION 0: SEARCH ======= -->
@@ -690,32 +456,22 @@
     <h2>חיפוש תושב</h2>
     <p>הכנס תעודת זהות של התושב כדי לאחזר את פרטיו מהמערכת</p>
     <div class="id-input-wrap">
-      <input type="number" id="searchID" placeholder="000000000" maxlength="9" inputmode="numeric"
+      <input type="number" id="searchID" placeholder="000000000" inputmode="numeric"
              oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
-             onkeydown="if(event.key==='Enter') searchResident()"
-             maxlength="9" minlength="9"/>
+             onkeydown="if(event.key==='Enter') searchResident()"/>
     </div>
     <button class="btn btn-primary" onclick="searchResident()">🔍 חפש תושב</button>
-    
-    <!-- מוצג רק אחרי חיפוש כושל -->
-    <div id="notFoundMsg" style="display:none; margin-top:16px">
-      <div style="
-        background:#fff8e1; border:1.5px solid #ffe082;
-        border-radius:10px; padding:14px; margin-bottom:12px;
-        font-size:14px; color:#795548;
-      ">⚠️ תושב לא נמצא ברשימה</div>
-      <button class="btn btn-outline" onclick="newResident()">
-        ➕ הוסף תושב חדש
-      </button>
+    <div id="notFoundMsg" style="display:none;margin-top:16px">
+      <div style="background:#fff8e1;border:1.5px solid #ffe082;border-radius:10px;padding:14px;
+        margin-bottom:12px;font-size:14px;color:#795548;">⚠️ תושב לא נמצא ברשימה</div>
+      <button class="btn btn-outline" onclick="newResident()">➕ הוסף תושב חדש</button>
     </div>
   </div>
 </div>
 
 <!-- ======= SECTION 1: PERSONAL DETAILS ======= -->
 <div class="section" id="sec1">
-  <div class="resident-card" id="residentCard">
-    <!-- filled dynamically -->
-  </div>
+  <div class="resident-card" id="residentCard"></div>
 
   <div class="card">
     <div class="card-title">📋 פרטי ממלא הפנייה</div>
@@ -799,6 +555,7 @@
       </div>
     </div>
   </div>
+
   <div class="nav-buttons">
     <button class="btn btn-outline btn-back" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';">→ חיפוש</button>
     <button class="btn btn-primary btn-next" onclick="goNextWithWarning(1)">המשך לשאלון האירוע ←</button>
@@ -814,23 +571,19 @@
     <div class="radio-group" id="locationGroup">
       <label class="radio-item" onclick="selectRadio('locationGroup',this,'לא אותר')">
         <input type="radio" name="location" value="לא אותר"/>
-        <div class="radio-dot"></div>
-        <span>לא אותר</span>
+        <div class="radio-dot"></div><span>לא אותר</span>
       </label>
       <label class="radio-item" onclick="selectRadio('locationGroup',this,'נמצא')">
         <input type="radio" name="location" value="נמצא"/>
-        <div class="radio-dot"></div>
-        <span>נמצא</span>
+        <div class="radio-dot"></div><span>נמצא</span>
       </label>
       <label class="radio-item" onclick="selectRadio('locationGroup',this,'נעדר')">
         <input type="radio" name="location" value="נעדר"/>
-        <div class="radio-dot"></div>
-        <span style="color:#e67e22;font-weight:700">נעדר</span>
+        <div class="radio-dot"></div><span style="color:#e67e22;font-weight:700">נעדר</span>
       </label>
       <label class="radio-item" onclick="selectRadio('locationGroup',this,'לכוד')">
         <input type="radio" name="location" value="לכוד"/>
-        <div class="radio-dot"></div>
-        <span style="color:var(--accent);font-weight:700">לכוד</span>
+        <div class="radio-dot"></div><span style="color:var(--accent);font-weight:700">לכוד</span>
       </label>
     </div>
   </div>
@@ -840,50 +593,51 @@
     <div class="radio-group" id="healthStatusGroup">
       <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'בריא')">
         <input type="radio" name="healthStatus" value="בריא"/>
-        <div class="radio-dot"></div>
-        <span>בריא</span>
+        <div class="radio-dot"></div><span>בריא</span>
       </label>
       <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפצע')">
         <input type="radio" name="healthStatus" value="נפצע"/>
-        <div class="radio-dot"></div>
-        <span style="color:#e67e22;font-weight:700">נפצע</span>
+        <div class="radio-dot"></div><span style="color:#e67e22;font-weight:700">נפצע</span>
       </label>
       <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפגע חרדה')">
         <input type="radio" name="healthStatus" value="נפגע חרדה"/>
-        <div class="radio-dot"></div>
-        <span style="color:#8e44ad;font-weight:700">נפגע חרדה</span>
+        <div class="radio-dot"></div><span style="color:#8e44ad;font-weight:700">נפגע חרדה</span>
       </label>
       <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פונה')">
         <input type="radio" name="healthStatus" value="פונה"/>
-        <div class="radio-dot"></div>
-        <span>פונה</span>
+        <div class="radio-dot"></div><span>פונה</span>
       </label>
       <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפטר')">
         <input type="radio" name="healthStatus" value="נפטר"/>
-        <div class="radio-dot"></div>
-        <span style="color:var(--accent);font-weight:700">נפטר</span>
+        <div class="radio-dot"></div><span style="color:var(--accent);font-weight:700">נפטר</span>
       </label>
     </div>
   </div>
 
+  <!-- ✅ שאלת מידת הפגיעה — מעודכנת לפי Dataverse, מופיעה רק כאן ולא אצל בני הבית -->
   <div class="card">
     <div class="card-title">💥 מידת הפגיעה בבית</div>
     <div class="radio-group" id="damageGroup">
-      <label class="radio-item" onclick="selectRadio('damageGroup',this,'הדף')">
-        <input type="radio" name="damage" value="הדף"/>
-        <div class="radio-dot"></div> הדף
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'אין נזק')">
+        <input type="radio" name="damage" value="אין נזק"/>
+        <div class="radio-dot"></div> אין נזק
       </label>
       <label class="radio-item" onclick="selectRadio('damageGroup',this,'רסיסים')">
         <input type="radio" name="damage" value="רסיסים"/>
-        <div class="radio-dot"></div> רסיסים בלבד
+        <div class="radio-dot"></div> רסיסים
       </label>
-      <label class="radio-item" onclick="selectRadio('damageGroup',this,'נוקים')">
-        <input type="radio" name="damage" value="נוקים"/>
-        <div class="radio-dot"></div> תקום
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'נזק קל')">
+        <input type="radio" name="damage" value="נזק קל"/>
+        <div class="radio-dot"></div> נזק קל
+      </label>
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'נזק בינוני')">
+        <input type="radio" name="damage" value="נזק בינוני"/>
+        <div class="radio-dot"></div> נזק בינוני
       </label>
       <label class="radio-item" onclick="selectRadio('damageGroup',this,'הרס מוחלט')">
         <input type="radio" name="damage" value="הרס מוחלט"/>
-        <div class="radio-dot"></div> הרס מוחלט
+        <div class="radio-dot"></div>
+        <span style="color:var(--accent);font-weight:700">הרס מוחלט</span>
       </label>
     </div>
   </div>
@@ -891,7 +645,8 @@
   <div class="card">
     <div class="card-title">👨‍👩‍👧 נפשות ונעדרים</div>
     <div class="field">
-      <label>נפשות שפונו מהבית (שם וגיל)</label>
+      <!-- ✅ תיקון טקסט: "לבית חולים" -->
+      <label>נפשות שפונו מהבית לבית חולים (שם וגיל)</label>
       <textarea id="evacuatedPersons" placeholder="לדוגמה: דוד 45, רחל 42, יוסי 12..."></textarea>
     </div>
     <div class="field">
@@ -1009,10 +764,11 @@
 
   <div id="housematesList"></div>
 
-  <div class="card" id="noHousematesCard" style="display:none; text-align:center; padding:30px">
-    <div style="font-size:36px; margin-bottom:10px">✅</div>
-    <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
+  <div class="card" id="noHousematesCard" style="display:none;text-align:center;padding:30px">
+    <div style="font-size:36px;margin-bottom:10px">✅</div>
+    <p style="color:var(--gray);font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
   </div>
+
   <div class="nav-buttons">
     <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
     <button class="btn btn-primary btn-next" onclick="goNextWithWarning(3)">המשך לאישור ←</button>
@@ -1026,7 +782,6 @@
     <div class="card-title">📋 סיכום לפני שמירה</div>
     <div id="summaryContent"></div>
   </div>
-
   <div class="card">
     <div class="card-title">✅ אישורים</div>
     <div class="confirm-item" id="conf1" onclick="toggleConfirm(this)">
@@ -1042,7 +797,6 @@
       <span>במידה ועלה נושא מס רכוש — הפניתי למילוי טופס מקוון</span>
     </div>
   </div>
-
   <div class="nav-buttons">
     <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
     <button class="btn btn-success btn-next" onclick="submitAll()" id="btnSubmit">💾 שמור ושלח</button>
@@ -1068,49 +822,22 @@
 </div>
 
 <!-- INCOMPLETE FIELDS DIALOG -->
-<div id="incompleteOverlay" style="
-  display:none;
-  position:fixed; inset:0;
-  background:rgba(0,0,0,0.6);
-  z-index:9999;
-  align-items:flex-end;
-  justify-content:center;
-  padding:20px;
-">
-  <div style="
-    background:white;
-    border-radius:20px 20px 16px 16px;
-    width:100%; max-width:480px;
-    padding:24px 20px;
-    animation: slideUp 0.3s ease;
-  ">
-    <h3 style="font-size:18px;font-weight:800;color:#2B3A8F;margin-bottom:6px">
-      ⚠️ שדות לא מולאו
-    </h3>
+<div id="incompleteOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  z-index:9999;align-items:flex-end;justify-content:center;padding:20px;">
+  <div style="background:white;border-radius:20px 20px 16px 16px;width:100%;max-width:480px;
+    padding:24px 20px;animation:slideUp 0.3s ease;">
+    <h3 style="font-size:18px;font-weight:800;color:#2B3A8F;margin-bottom:6px">⚠️ שדות לא מולאו</h3>
     <p style="font-size:14px;color:#666;margin-bottom:16px">
       השדות הבאים נשארו ריקים — ניתן להמשיך או לחזור ולמלא:
     </p>
     <div id="incompleteList" style="margin-bottom:20px;max-height:200px;overflow-y:auto"></div>
     <div style="display:flex;gap:10px">
-      <button onclick="backToForm()" style="
-        flex:1; padding:14px;
-        background:#f0f4ff;
-        border:2px solid #2B3A8F;
-        border-radius:12px;
-        color:#2B3A8F;
-        font-size:15px; font-weight:700;
-        font-family:'Assistant',sans-serif;
-        cursor:pointer;
-      ">← חזור לטופס</button>
-      <button onclick="continueAnyway()" style="
-        flex:1; padding:14px;
-        background:#2B3A8F;
-        border:none; border-radius:12px;
-        color:white;
-        font-size:15px; font-weight:700;
-        font-family:'Assistant',sans-serif;
-        cursor:pointer;
-      ">דלג והמשך ←</button>
+      <button onclick="backToForm()" style="flex:1;padding:14px;background:#f0f4ff;border:2px solid #2B3A8F;
+        border-radius:12px;color:#2B3A8F;font-size:15px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;">
+        ← חזור לטופס</button>
+      <button onclick="continueAnyway()" style="flex:1;padding:14px;background:#2B3A8F;border:none;
+        border-radius:12px;color:white;font-size:15px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;">
+        דלג והמשך ←</button>
     </div>
   </div>
 </div>
@@ -1126,24 +853,15 @@
 
 <script>
 // =============================================
-// CONFIGURATION — עדכן את ה-URL של ה-Flow
+// CONFIGURATION
 // =============================================
-// קריאת מזהה האירוע מה-URL בלבד
 const _urlParams = new URLSearchParams(window.location.search);
 const _eventFromURL = _urlParams.get('event') || _urlParams.get('eventId') || _urlParams.get('id');
 
 const CONFIG = {
-  // Flow לחיפוש תושב לפי ת"ז
   SEARCH_FLOW_URL: 'https://58680756e80ae00ebd0a06d0c2bf5c.5e.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/5de0d951b98f4b649f69a1086d31b8ba/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=LfkN-e9rHtfkokT5h4UMgheJkzuDQh3RsLgggASDg8o',
-  
-  // Flow לשמירת/עדכון תושב
   SAVE_FLOW_URL: 'https://58680756e80ae00ebd0a06d0c2bf5c.5e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/e8227a4d0f8a404b804a3a2bce01f995/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=NPLWvcuJIEhWOT-GC6ZamDBWpuYUxNPVq2WAdtannS0',
-  
-  // מזהה האירוע — נקרא מה-URL: field-form.html?event=EVT-001
   EVENT_ID: _eventFromURL || 'EVT-UNKNOWN',
-
-  // קוד גישה — המשתמש מקליד אותו במסך הכניסה
-  // שנה כאן כדי לעדכן את הקוד
   ACCESS_CODE: '12345678'
 };
 
@@ -1155,20 +873,18 @@ let state = {
   isNew: false,
   record: null,
   housemates: [],
-  houseMemberAnswers: {} // { recordId: { damageLevel, ... } }
+  houseMemberAnswers: {}
 };
 
 // =============================================
 // INIT
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
-  // בדוק אם יש טוקן תקף ב-localStorage
   try {
     const saved = localStorage.getItem('fieldFormAuth');
     if (saved) {
       const { code, expiry } = JSON.parse(saved);
       if (code === CONFIG.ACCESS_CODE && Date.now() < expiry) {
-        // טוקן תקף — דלג על מסך כניסה
         document.getElementById('loginScreen').style.display = 'none';
         document.querySelector('.header').style.display = '';
         if (CONFIG.EVENT_ID === 'EVT-UNKNOWN') {
@@ -1179,7 +895,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('sec0').style.display = 'block';
         document.getElementById('sec0').classList.add('active');
-        // רענן תפוגה לשעה נוספת
         const newExpiry = Date.now() + (60 * 60 * 1000);
         localStorage.setItem('fieldFormAuth', JSON.stringify({ code, expiry: newExpiry }));
         return;
@@ -1190,22 +905,15 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch(e) {
     localStorage.removeItem('fieldFormAuth');
   }
-  // אין טוקן תקף — הצג מסך כניסה
   showLoginScreen();
 });
 
 function showLoginScreen() {
-  // הסתר את כל תוכן הדף
   document.querySelector('.header').style.display = 'none';
   document.getElementById('stepsBar').style.display = 'none';
   document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
   document.getElementById('navFooter').style.display = 'none';
-
-  // הצג מסך כניסה
-  const loginDiv = document.getElementById('loginScreen');
-  loginDiv.style.display = 'flex';
-
-  // פוקוס אוטומטי על שדה הקוד
+  document.getElementById('loginScreen').style.display = 'flex';
   setTimeout(() => {
     const inp = document.getElementById('accessCodeInput');
     if (inp) inp.focus();
@@ -1217,7 +925,6 @@ function submitAccessCode() {
   const errorEl = document.getElementById('loginError');
   const attempts = parseInt(sessionStorage.getItem('loginAttempts') || '0');
 
-  // חסימה אחרי 5 ניסיונות כושלים
   if (attempts >= 5) {
     errorEl.textContent = '🔒 יותר מדי ניסיונות. רענן את הדף.';
     errorEl.style.display = 'block';
@@ -1227,14 +934,11 @@ function submitAccessCode() {
   }
 
   if (entered === CONFIG.ACCESS_CODE) {
-    // הצלחה — שמור טוקן ב-localStorage לשעה
     sessionStorage.removeItem('loginAttempts');
-    const expiry = Date.now() + (60 * 60 * 1000); // שעה אחת
+    const expiry = Date.now() + (60 * 60 * 1000);
     localStorage.setItem('fieldFormAuth', JSON.stringify({ code: entered, expiry }));
     document.getElementById('loginScreen').style.display = 'none';
     document.querySelector('.header').style.display = '';
-
-    // בדיקת אירוע
     if (CONFIG.EVENT_ID === 'EVT-UNKNOWN') {
       document.getElementById('eventLabel').textContent = '⚠️ לא נבחר אירוע!';
       document.getElementById('eventLabel').style.color = '#ff6b6b';
@@ -1242,13 +946,9 @@ function submitAccessCode() {
     } else {
       document.getElementById('eventLabel').textContent = 'אירוע פעיל: ' + CONFIG.EVENT_ID;
     }
-
-    // הצג section 0
     document.getElementById('sec0').style.display = 'block';
     document.getElementById('sec0').classList.add('active');
-
   } else {
-    // כישלון
     sessionStorage.setItem('loginAttempts', attempts + 1);
     const remaining = 4 - attempts;
     errorEl.textContent = remaining > 0
@@ -1257,14 +957,11 @@ function submitAccessCode() {
     errorEl.style.display = 'block';
     document.getElementById('accessCodeInput').value = '';
     document.getElementById('accessCodeInput').focus();
-
-    // רטט על מובייל
     document.getElementById('loginCard').style.animation = 'shake 0.4s ease';
     setTimeout(() => document.getElementById('loginCard').style.animation = '', 400);
   }
 }
 
-// Enter מפעיל כניסה
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
     submitAccessCode();
@@ -1275,9 +972,7 @@ document.addEventListener('keydown', (e) => {
 // SEARCH
 // =============================================
 async function searchResident() {
-  // הסתר הודעת "לא נמצא" מחיפוש קודם
   document.getElementById('notFoundMsg').style.display = 'none';
-  
   const id = document.getElementById('searchID').value.trim();
   if (!id || id.length !== 9) {
     showToast('תעודת זהות חייבת להיות 9 ספרות', 'error');
@@ -1296,11 +991,8 @@ async function searchResident() {
     if (data.found) {
       state.record = data.record;
       state.isNew = false;
-      // המרת אובייקטי Dataverse גולמיים לפורמט פשוט
       const rawNeighbors = data.neighbors || data.housemates || [];
       state.housemates = rawNeighbors.map(n => {
-        // Dataverse מחזיר שדות עם @odata.type לפני ה-GUID
-        // צריך לחפש את השדה ישירות בלי ה-annotation
         const recordId = n['new_individualdemographicrecordid'] || n.recordId || '';
         return {
           recordId,
@@ -1317,9 +1009,9 @@ async function searchResident() {
           healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || '',
         };
       });
-      console.log('בני בית שנמצאו:', state.housemates.length, state.housemates);
       fillFormFromRecord(data.record);
       showToast('תושב נמצא: ' + data.record.fullName, 'success');
+      setTimeout(() => goToSection(1), 600);
     } else {
       state.record = null;
       state.isNew = true;
@@ -1327,21 +1019,15 @@ async function searchResident() {
       clearForm();
       document.getElementById('identityNumber').value = id;
       showToast('תושב לא נמצא', 'error');
-      // הצג כפתור "תושב חדש" — לא עובר אוטומטית
       document.getElementById('notFoundMsg').style.display = 'block';
-      return;
     }
-    // תושב נמצא — עבור אוטומטית לפרטים האישיים
-    setTimeout(() => goToSection(1), 600);
   } catch(e) {
     hideLoading();
-    // Demo mode — מצב הדגמה ללא Flow
     demoSearch(id);
   }
 }
 
 function demoSearch(id) {
-  // נתוני דמו לבדיקה
   const demo = {
     '111111111': {
       fullName: 'כהן דוד', firstName: 'דוד', lastName: 'כהן',
@@ -1349,26 +1035,16 @@ function demoSearch(id) {
       emailAddress: 'cohen@test.com',
       streetName: 'הרצל', houseNumber: '10', floor: '3', apartmentNumber: '3',
       recordId: 'd270130b-772c-f111-88b3-002248994e78'
-    },
-    '333333333': {
-      fullName: 'לוי משה', firstName: 'משה', lastName: 'לוי',
-      primaryPhone: '', secondaryPhone: '',
-      emailAddress: 'levi@test.com',
-      streetName: 'הרצל', houseNumber: '10', floor: '', apartmentNumber: '4',
-      recordId: 'd370130b-772c-f111-88b3-002248994e78'
     }
   };
   const found = demo[id];
   if (found) {
     state.record = found;
     state.isNew = false;
-    // בדיקת בני בית דמו — אותו רחוב+בית+דירה
     state.housemates = [];
-    if (found.streetName === 'הרצל' && found.houseNumber === '10') {
-      // דמו: בני בית בבניין אחר
-    }
     fillFormFromRecord(found);
     showToast('תושב נמצא: ' + found.fullName + ' (מצב הדגמה)', 'success');
+    setTimeout(() => goToSection(1), 600);
   } else {
     state.record = null;
     state.isNew = true;
@@ -1377,10 +1053,7 @@ function demoSearch(id) {
     document.getElementById('identityNumber').value = id;
     showToast('תושב לא נמצא — מצב הדגמה', 'error');
     document.getElementById('notFoundMsg').style.display = 'block';
-    return;
   }
-  // נמצא — עבור אוטומטית
-  setTimeout(() => goToSection(1), 600);
 }
 
 function newResident() {
@@ -1402,7 +1075,6 @@ function fillFormFromRecord(r) {
     if (val) el.classList.add('prefilled'); else el.classList.remove('prefilled');
   };
 
-  // שם — פיצול מ-fullName אם אין firstName/lastName
   if (r.firstName && r.lastName) {
     prefill('firstName', r.firstName);
     prefill('lastName', r.lastName);
@@ -1426,17 +1098,15 @@ function fillFormFromRecord(r) {
   prefill('notes', r.notes || r.new_notes || '');
 
   updateResidentCard(r, false);
-  // עדכן שם בכפתור זכוכית מגדלת
   const resName = r.fullName || ((r.firstName||'') + ' ' + (r.lastName||'')) || 'תושב';
   const nameEl = document.getElementById('currentResidentName');
-  if (nameEl) nameEl.textContent = resName.trim().split(' ')[0]; // שם פרטי בלבד
+  if (nameEl) nameEl.textContent = resName.trim().split(' ')[0];
 }
 
 function clearForm() {
   ['firstName','lastName','phone1','phone2','email','streetName','houseNumber','floor','apartmentNumber',
-   'age','gender','totalChildren',
-   'evacuatedPersons','missingPersons','pets','additionalNeeds','vulnerableHousemates','houseMemberDistress',
-   'interviewerName'].forEach(id => {
+   'age','gender','totalChildren','evacuatedPersons','missingPersons','pets','additionalNeeds',
+   'vulnerableHousemates','houseMemberDistress','interviewerName'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.classList.remove('prefilled'); }
   });
@@ -1450,7 +1120,6 @@ function updateResidentCard(r, isNew) {
   const name = r ? (r.fullName || ((r.firstName||'') + ' ' + (r.lastName||''))) : 'תושב חדש';
   const idNum = r ? (r.identityNumber || r.new_identitynumber || document.getElementById('searchID')?.value || '') : document.getElementById('searchID')?.value || '';
   const initials = name.split(' ').map(w => w[0]).filter(Boolean).slice(0,2).join('');
-
   card.innerHTML = `
     <div class="resident-card-header">
       <div class="resident-avatar">${initials || '?'}</div>
@@ -1521,7 +1190,7 @@ function validateSection(sec) {
 }
 
 // =============================================
-// NEIGHBORS
+// NEIGHBORS — ✅ ללא שאלת מידת הפגיעה (הדירה משותפת)
 // =============================================
 function buildHousematesSection() {
   const list = document.getElementById('housematesList');
@@ -1540,10 +1209,10 @@ function buildHousematesSection() {
   document.getElementById('housematesSubtitle').textContent = 'אנא בדוק את שלומם וענה על השאלות עבורם';
 
   state.housemates.forEach((n, i) => {
-    const id = n.new_individualdemographicrecordid || n.recordId || n.id || i;
-    const name = n.new_fullname || n.fullName || 'לא ידוע';
+    const id = n.recordId || i;
+    const name = n.fullName || 'לא ידוע';
     const initials = name.split(' ').map(w=>w[0]).filter(Boolean).slice(0,2).join('');
-    const idNum = n.new_identitynumber || n.identityNumber || '';
+    const idNum = n.identityNumber || '';
 
     const div = document.createElement('div');
     div.className = 'houseMember-card';
@@ -1558,17 +1227,6 @@ function buildHousematesSection() {
         <div class="houseMember-expand">▼</div>
       </div>
       <div class="houseMember-body">
-        <div class="card" style="margin-bottom:10px;box-shadow:none;border:1.5px solid var(--border)">
-          <div class="card-title" style="font-size:12px">💥 מידת הפגיעה</div>
-          <div class="radio-group" id="nDamage_${i}">
-            ${['הדף','רסיסים','נוקים','הרס מוחלט'].map(v =>
-              `<label class="radio-item" onclick="selectRadio('nDamage_${i}',this,'${v}')">
-                <input type="radio" name="nd${i}" value="${v}"/>
-                <div class="radio-dot"></div> ${v}
-              </label>`
-            ).join('')}
-          </div>
-        </div>
         <div class="field">
           <label>סטטוס מיקום</label>
           <select id="nLocation_${i}">
@@ -1601,14 +1259,12 @@ function buildHousematesSection() {
 }
 
 function toggleNeighbor(i) {
-  const card = document.getElementById(`ncard_${i}`);
-  card.classList.toggle('open');
+  document.getElementById(`ncard_${i}`).classList.toggle('open');
 }
 
 function saveNeighbor(i, recordId) {
   const data = {
     recordId,
-    damageLevel: getRadioValue(`nDamage_${i}`),
     locationStatus: document.getElementById(`nLocation_${i}`)?.value,
     healthStatus: document.getElementById(`nHealth_${i}`)?.value,
     notes: document.getElementById(`nNotes_${i}`)?.value
@@ -1672,6 +1328,7 @@ async function submitAll() {
     interviewerName: document.getElementById('interviewerName').value,
     locationStatus: getRadioValue('locationGroup'),
     healthStatus: getRadioValue('healthStatusGroup'),
+    // ✅ damageLevel — ערכים תואמים ל-Dataverse
     damageLevel: getRadioValue('damageGroup'),
     evacuatedPersons: document.getElementById('evacuatedPersons').value,
     missingPersons: document.getElementById('missingPersons').value,
@@ -1681,14 +1338,13 @@ async function submitAll() {
     housingAssistance: getRadioValue('housingGroup'),
     additionalNeeds: document.getElementById('additionalNeeds').value,
     vulnerableHousemates: document.getElementById('vulnerableHousemates').value,
-    houseMemberDistress: document.getElementById('houseMemberDistress').value,
+    housemateDistress: document.getElementById('houseMemberDistress').value,
     notes: document.getElementById('notes').value,
     datasource: 'שטח',
-    houseMemberUpdates: Object.values(state.houseMemberAnswers)
+    housemateUpdates: Object.values(state.houseMemberAnswers)
   };
 
   showLoading('שומר נתונים...');
-
   try {
     await fetch(CONFIG.SAVE_FLOW_URL, {
       method: 'POST',
@@ -1698,10 +1354,8 @@ async function submitAll() {
     hideLoading();
   } catch(e) {
     hideLoading();
-    // demo — המשך בכל מקרה
   }
 
-  // הצגת מסך הצלחה
   document.getElementById('successMsg').textContent =
     state.isNew ? 'רשומה חדשה נוצרה בהצלחה במערכת' : 'הרשומה עודכנה בהצלחה במערכת';
   document.getElementById('finalSummary').innerHTML = `
@@ -1710,7 +1364,6 @@ async function submitAll() {
     <div class="summary-row"><span>כתובת</span><strong>${payload.streetName} ${payload.houseNumber}</strong></div>
     <div class="summary-row"><span>בני בית שעודכנו</span><strong>${Object.keys(state.houseMemberAnswers).length}</strong></div>
   `;
-
   goToSection(5);
 }
 
@@ -1718,10 +1371,9 @@ async function submitAll() {
 // NAVIGATION
 // =============================================
 function goToSection(n) {
-  // הצג את כל הסקשנים (הסר display:none שנשמר מה-login)
   document.querySelectorAll('.section').forEach(s => {
     s.classList.remove('active');
-    s.style.display = ''; // מנקה כל style inline
+    s.style.display = '';
   });
   const target = document.getElementById('sec' + n);
   target.classList.add('active');
@@ -1738,12 +1390,9 @@ function goToSection(n) {
   }
 
   stepsBar.style.display = 'flex';
-  navFooter.style.display = 'none'; // כפתורים בתוך הסקשן עצמו
-  // הצג כפתור זכוכית מגדלת
+  navFooter.style.display = 'none';
   document.getElementById('searchToggleBtn').style.display = 'flex';
 
-  // update steps
-  // stepMap: sec1=פרטים, sec2=שאלון, sec3=בני בית, sec4=אישור
   const stepMap = [null,'step1item','step2item','step3item','step4item'];
   [1,2,3,4].forEach(i => {
     const el = document.getElementById(stepMap[i]);
@@ -1753,7 +1402,6 @@ function goToSection(n) {
     else if (i < n) el.classList.add('done');
   });
 
-  // update nav buttons
   document.getElementById('btnBack').style.display = n === 1 ? 'none' : 'flex';
   const btnNext = document.getElementById('btnNext');
   if (n === 4) { btnNext.style.display = 'none'; }
@@ -1765,7 +1413,6 @@ function goToSection(n) {
 function goNext() {
   const n = state.currentSection;
   if (!validateSection(n)) return;
-
   if (n === 1) {
     goToSection(2);
   } else if (n === 2) {
@@ -1783,31 +1430,22 @@ function goBack() {
   else goToSection(0);
 }
 
-// ===== זכוכית מגדלת — חיפוש מהיר =====
 function toggleSearchBar() {
   const panel = document.getElementById('searchPanel');
   const isOpen = panel.style.display !== 'none';
   panel.style.display = isOpen ? 'none' : 'block';
-  if (!isOpen) {
-    setTimeout(() => document.getElementById('quickSearchID')?.focus(), 100);
-  }
+  if (!isOpen) setTimeout(() => document.getElementById('quickSearchID')?.focus(), 100);
 }
 
 async function quickSearch() {
   const id = document.getElementById('quickSearchID').value.trim();
-  if (!id || id.length < 5) {
-    showToast('נא להזין תעודת זהות תקינה', 'error');
-    return;
-  }
-  // הסתר פאנל חיפוש
+  if (!id || id.length < 5) { showToast('נא להזין תעודת זהות תקינה', 'error'); return; }
   document.getElementById('searchPanel').style.display = 'none';
   document.getElementById('quickSearchID').value = '';
-  // שים ב-searchID והפעל חיפוש
   document.getElementById('searchID').value = id;
   searchResident();
 }
 
-// ===== אזהרת שדות חסרים =====
 function getEmptyFields(sec) {
   const emptyFields = [];
   if (sec === 1) {
@@ -1829,7 +1467,7 @@ function getEmptyFields(sec) {
     if (!getRadioValue('healthStatusGroup')) emptyFields.push('סטטוס בריאות');
     if (!getRadioValue('damageGroup')) emptyFields.push('מידת הפגיעה');
     const evac = document.getElementById('evacuatedPersons')?.value?.trim();
-    if (!evac) emptyFields.push('נפשות שפונו');
+    if (!evac) emptyFields.push('נפשות שפונו לבית חולים');
     if (!getRadioValue('healthFundGroup')) emptyFields.push('קופ"ח');
     if (!getRadioValue('medicalGroup')) emptyFields.push('צורך רפואי');
     if (!getRadioValue('housingGroup')) emptyFields.push('עזרה בשהייה');
@@ -1845,9 +1483,7 @@ function getEmptyFields(sec) {
 }
 
 function goNextWithWarning(sec) {
-  // בדיקת חובה תחילה
   if (!validateSection(sec)) return;
-  
   const empty = getEmptyFields(sec);
   if (empty.length > 0) {
     showIncompleteDialog(empty, sec);
@@ -1859,12 +1495,8 @@ function goNextWithWarning(sec) {
 function showIncompleteDialog(fields, sec) {
   const overlay = document.getElementById('incompleteOverlay');
   const list = document.getElementById('incompleteList');
-  list.innerHTML = fields.map(f => `<div style="
-    padding:8px 12px; margin-bottom:6px;
-    background:#fff8e1; border-radius:8px;
-    border-right:3px solid #ffc107;
-    font-size:14px; color:#555;
-  ">⚠️ ${f}</div>`).join('');
+  list.innerHTML = fields.map(f => `<div style="padding:8px 12px;margin-bottom:6px;background:#fff8e1;
+    border-radius:8px;border-right:3px solid #ffc107;font-size:14px;color:#555;">⚠️ ${f}</div>`).join('');
   overlay.style.display = 'flex';
   overlay._sec = sec;
 }
@@ -1886,19 +1518,11 @@ function resetAll() {
   document.querySelectorAll('.confirm-item').forEach(c => {
     c.classList.remove('checked');
     const check = c.querySelector('.confirm-check');
-    if (check) {
-      check.textContent = '';
-      check.style.background = '';
-      check.style.borderColor = '';
-      check.style.color = '';
-    }
+    if (check) { check.textContent = ''; check.style.background = ''; check.style.borderColor = ''; check.style.color = ''; }
   });
   goToSection(0);
 }
 
-// =============================================
-// UI HELPERS
-// =============================================
 function showLoading(text) {
   document.getElementById('loadingText').textContent = text || 'טוען...';
   document.getElementById('loadingOverlay').classList.add('show');
