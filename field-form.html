@@ -540,7 +540,7 @@
       id="accessCodeInput"
       type="password"
       inputmode="numeric"
-      placeholder="קוד גישה (9 ספרות)"
+      placeholder="קוד גישה"
       autocomplete="off"
       style="
         width:100%;
@@ -692,7 +692,8 @@
     <div class="id-input-wrap">
       <input type="number" id="searchID" placeholder="000000000" maxlength="9" inputmode="numeric"
              oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
-             onkeydown="if(event.key==='Enter') searchResident()"/>
+             onkeydown="if(event.key==='Enter') searchResident()"
+             maxlength="9" minlength="9"/>
     </div>
     <button class="btn btn-primary" onclick="searchResident()">🔍 חפש תושב</button>
     
@@ -1134,7 +1135,7 @@ const CONFIG = {
 
   // קוד גישה — המשתמש מקליד אותו במסך הכניסה
   // שנה כאן כדי לעדכן את הקוד
-  ACCESS_CODE: '123456789'
+  ACCESS_CODE: '12345678'
 };
 
 // =============================================
@@ -1269,8 +1270,9 @@ async function searchResident() {
   document.getElementById('notFoundMsg').style.display = 'none';
   
   const id = document.getElementById('searchID').value.trim();
-  if (!id || id.length < 5) {
-    showToast('נא להזין תעודת זהות תקינה', 'error');
+  if (!id || id.length !== 9) {
+    showToast('תעודת זהות חייבת להיות 9 ספרות', 'error');
+    document.getElementById('searchID').focus();
     return;
   }
   showLoading('מחפש תושב...');
