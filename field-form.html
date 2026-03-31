@@ -341,7 +341,7 @@
   .confirm-item.checked .confirm-check { background: var(--green); border-color: var(--green); color: white; }
 
   /* ===== NEIGHBORS SECTION ===== */
-  .neighbors-banner {
+  .housemates-banner {
     background: linear-gradient(135deg, #2B3A8F, #1a2970);
     color: white;
     border-radius: var(--radius);
@@ -349,11 +349,11 @@
     margin-bottom: 14px;
     display: flex; gap: 14px; align-items: flex-start;
   }
-  .neighbors-banner-icon { font-size: 28px; flex-shrink: 0; }
-  .neighbors-banner h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
-  .neighbors-banner p { font-size: 13px; opacity: 0.8; }
+  .housemates-banner-icon { font-size: 28px; flex-shrink: 0; }
+  .housemates-banner h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+  .housemates-banner p { font-size: 13px; opacity: 0.8; }
 
-  .neighbor-card {
+  .houseMember-card {
     background: white;
     border-radius: var(--radius);
     overflow: hidden;
@@ -362,14 +362,14 @@
     border: 2px solid transparent;
     transition: border-color 0.2s;
   }
-  .neighbor-card.answered { border-color: var(--green); }
-  .neighbor-card-header {
+  .houseMember-card.answered { border-color: var(--green); }
+  .houseMember-card-header {
     padding: 14px 16px;
     display: flex; align-items: center; gap: 12px;
     background: var(--light);
     cursor: pointer;
   }
-  .neighbor-avatar {
+  .houseMember-avatar {
     width: 38px; height: 38px;
     background: #2B3A8F;
     color: white;
@@ -378,17 +378,17 @@
     font-size: 14px; font-weight: 800;
     flex-shrink: 0;
   }
-  .neighbor-name { font-size: 15px; font-weight: 700; }
-  .neighbor-id { font-size: 12px; color: var(--gray); }
-  .neighbor-expand {
+  .houseMember-name { font-size: 15px; font-weight: 700; }
+  .houseMember-id { font-size: 12px; color: var(--gray); }
+  .houseMember-expand {
     margin-right: auto;
     font-size: 18px;
     color: var(--gray);
     transition: transform 0.2s;
   }
-  .neighbor-card.open .neighbor-expand { transform: rotate(180deg); }
-  .neighbor-body { display: none; padding: 16px; }
-  .neighbor-card.open .neighbor-body { display: block; }
+  .houseMember-card.open .houseMember-expand { transform: rotate(180deg); }
+  .houseMember-body { display: none; padding: 16px; }
+  .houseMember-card.open .houseMember-body { display: block; }
 
   /* ===== TOAST ===== */
   .toast {
@@ -592,7 +592,7 @@
   </div>
   <div class="step-arrow">›</div>
   <div class="step-item" id="step4item">
-    <div class="step-num">4</div> שכנים
+    <div class="step-num">4</div> בני בית
   </div>
   <div class="step-arrow">›</div>
   <div class="step-item" id="step5item">
@@ -865,14 +865,14 @@
   </div>
 
   <div class="card">
-    <div class="card-title">🏘️ מידע על שכנים</div>
+    <div class="card-title">🏘️ מידע על בני הבית</div>
     <div class="field">
-      <label>שכנים עם מגבלות פיזיות / צרכים מיוחדים</label>
-      <textarea id="vulnerableNeighbors" placeholder="קשישים, נכים, ילדים ללא ליווי..."></textarea>
+      <label>בני בית עם מגבלות פיזיות / צרכים מיוחדים</label>
+      <textarea id="vulnerableHousemates" placeholder="קשישים, נכים, ילדים ללא ליווי..."></textarea>
     </div>
     <div class="field">
-      <label>סימני מצוקה בשכנים שנותרו בבניין</label>
-      <textarea id="neighborDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
+      <label>סימני מצוקה בבני הבית שנותרו בבניין</label>
+      <textarea id="houseMemberDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
     </div>
   </div>
   <div class="footer-spacer"></div>
@@ -880,17 +880,17 @@
 
 <!-- ======= SECTION 3: NEIGHBORS ======= -->
 <div class="section" id="sec3">
-  <div class="neighbors-banner">
-    <div class="neighbors-banner-icon">🏠</div>
+  <div class="housemates-banner">
+    <div class="housemates-banner-icon">🏠</div>
     <div>
-      <h3 id="neighborsTitle">נמצאו שכנים באותה דירה</h3>
-      <p id="neighborsSubtitle">אנא בדוק את שלומם וענה על השאלות עבורם</p>
+      <h3 id="housematesTitle">נמצאו בני בית</h3>
+      <p id="housematesSubtitle">אנא בדוק את שלומם וענה על השאלות עבורם</p>
     </div>
   </div>
 
-  <div id="neighborsList"></div>
+  <div id="housematesList"></div>
 
-  <div class="card" id="noNeighborsCard" style="display:none; text-align:center; padding:30px">
+  <div class="card" id="noHousematesCard" style="display:none; text-align:center; padding:30px">
     <div style="font-size:36px; margin-bottom:10px">✅</div>
     <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
   </div>
@@ -985,15 +985,43 @@ let state = {
   currentSection: 0,
   isNew: false,
   record: null,
-  neighbors: [],
-  neighborAnswers: {} // { recordId: { damageLevel, ... } }
+  housemates: [],
+  houseMemberAnswers: {} // { recordId: { damageLevel, ... } }
 };
 
 // =============================================
 // INIT
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
-  // הצג מסך כניסה — הטופס מוסתר עד לאימות
+  // בדוק אם יש טוקן תקף ב-localStorage
+  try {
+    const saved = localStorage.getItem('fieldFormAuth');
+    if (saved) {
+      const { code, expiry } = JSON.parse(saved);
+      if (code === CONFIG.ACCESS_CODE && Date.now() < expiry) {
+        // טוקן תקף — דלג על מסך כניסה
+        document.getElementById('loginScreen').style.display = 'none';
+        document.querySelector('.header').style.display = '';
+        if (CONFIG.EVENT_ID === 'EVT-UNKNOWN') {
+          document.getElementById('eventLabel').textContent = '⚠️ לא נבחר אירוע!';
+          document.getElementById('eventLabel').style.color = '#ff6b6b';
+        } else {
+          document.getElementById('eventLabel').textContent = 'אירוע פעיל: ' + CONFIG.EVENT_ID;
+        }
+        document.getElementById('sec0').style.display = 'block';
+        document.getElementById('sec0').classList.add('active');
+        // רענן תפוגה לשעה נוספת
+        const newExpiry = Date.now() + (60 * 60 * 1000);
+        localStorage.setItem('fieldFormAuth', JSON.stringify({ code, expiry: newExpiry }));
+        return;
+      } else {
+        localStorage.removeItem('fieldFormAuth');
+      }
+    }
+  } catch(e) {
+    localStorage.removeItem('fieldFormAuth');
+  }
+  // אין טוקן תקף — הצג מסך כניסה
   showLoginScreen();
 });
 
@@ -1030,8 +1058,10 @@ function submitAccessCode() {
   }
 
   if (entered === CONFIG.ACCESS_CODE) {
-    // הצלחה — הסתר מסך כניסה, הצג את הדף
+    // הצלחה — שמור טוקן ב-localStorage לשעה
     sessionStorage.removeItem('loginAttempts');
+    const expiry = Date.now() + (60 * 60 * 1000); // שעה אחת
+    localStorage.setItem('fieldFormAuth', JSON.stringify({ code: entered, expiry }));
     document.getElementById('loginScreen').style.display = 'none';
     document.querySelector('.header').style.display = '';
 
@@ -1093,18 +1123,18 @@ async function searchResident() {
     if (data.found) {
       state.record = data.record;
       state.isNew = false;
-      state.neighbors = data.neighbors || [];
+      state.housemates = data.housemates || [];
       fillFormFromRecord(data.record);
       showToast('תושב נמצא: ' + data.record.fullName, 'success');
     } else {
       state.record = null;
       state.isNew = true;
-      state.neighbors = [];
+      state.housemates = [];
       clearForm();
       document.getElementById('identityNumber').value = id;
       showToast('תושב לא נמצא — ממלאים פרטים חדשים', 'error');
     }
-    goToSection(1);
+    setTimeout(() => goToSection(1), 600);
   } catch(e) {
     hideLoading();
     // Demo mode — מצב הדגמה ללא Flow
@@ -1134,28 +1164,28 @@ function demoSearch(id) {
   if (found) {
     state.record = found;
     state.isNew = false;
-    // בדיקת שכנים דמו — אותו רחוב+בית+דירה
-    state.neighbors = [];
+    // בדיקת בני בית דמו — אותו רחוב+בית+דירה
+    state.housemates = [];
     if (found.streetName === 'הרצל' && found.houseNumber === '10') {
-      // דמו: שכנים בבניין אחר
+      // דמו: בני בית בבניין אחר
     }
     fillFormFromRecord(found);
     showToast('תושב נמצא: ' + found.fullName + ' (מצב הדגמה)', 'success');
   } else {
     state.record = null;
     state.isNew = true;
-    state.neighbors = [];
+    state.housemates = [];
     clearForm();
     document.getElementById('identityNumber').value = id;
     showToast('תושב לא נמצא — מצב הדגמה', 'error');
   }
-  goToSection(1);
+  setTimeout(() => goToSection(1), 600);
 }
 
 function newResident() {
   state.record = null;
   state.isNew = true;
-  state.neighbors = [];
+  state.housemates = [];
   clearForm();
   goToSection(1);
 }
@@ -1199,7 +1229,7 @@ function fillFormFromRecord(r) {
 function clearForm() {
   ['firstName','lastName','phone1','phone2','email','streetName','houseNumber','floor','apartmentNumber',
    'age','gender','totalChildren',
-   'evacuatedPersons','missingPersons','pets','additionalNeeds','vulnerableNeighbors','neighborDistress',
+   'evacuatedPersons','missingPersons','pets','additionalNeeds','vulnerableHousemates','houseMemberDistress',
    'interviewerName'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.classList.remove('prefilled'); }
@@ -1284,41 +1314,41 @@ function validateSection(sec) {
 // =============================================
 // NEIGHBORS
 // =============================================
-function buildNeighborsSection() {
-  const list = document.getElementById('neighborsList');
-  const noCard = document.getElementById('noNeighborsCard');
+function buildHousematesSection() {
+  const list = document.getElementById('housematesList');
+  const noCard = document.getElementById('noHousematesCard');
   list.innerHTML = '';
 
-  if (!state.neighbors || state.neighbors.length === 0) {
+  if (!state.housemates || state.housemates.length === 0) {
     noCard.style.display = 'block';
-    document.getElementById('neighborsTitle').textContent = 'בדיקת שכנים';
-    document.getElementById('neighborsSubtitle').textContent = 'לא נמצאו תושבים נוספים רשומים באותה דירה';
+    document.getElementById('housematesTitle').textContent = 'בדיקת בני בית';
+    document.getElementById('housematesSubtitle').textContent = 'לא נמצאו תושבים נוספים רשומים באותה דירה';
     return;
   }
 
   noCard.style.display = 'none';
-  document.getElementById('neighborsTitle').textContent = `נמצאו ${state.neighbors.length} שכנים באותה דירה`;
-  document.getElementById('neighborsSubtitle').textContent = 'אנא בדוק את שלומם וענה על השאלות עבורם';
+  document.getElementById('housematesTitle').textContent = `נמצאו ${state.housemates.length} בני בית`;
+  document.getElementById('housematesSubtitle').textContent = 'אנא בדוק את שלומם וענה על השאלות עבורם';
 
-  state.neighbors.forEach((n, i) => {
+  state.housemates.forEach((n, i) => {
     const id = n.recordId || n.id || i;
     const name = n.fullName || n.new_fullname || 'לא ידוע';
     const initials = name.split(' ').map(w=>w[0]).filter(Boolean).slice(0,2).join('');
     const idNum = n.identityNumber || n.new_identitynumber || '';
 
     const div = document.createElement('div');
-    div.className = 'neighbor-card';
+    div.className = 'houseMember-card';
     div.id = `ncard_${i}`;
     div.innerHTML = `
-      <div class="neighbor-card-header" onclick="toggleNeighbor(${i})">
-        <div class="neighbor-avatar">${initials}</div>
+      <div class="houseMember-card-header" onclick="toggleNeighbor(${i})">
+        <div class="houseMember-avatar">${initials}</div>
         <div>
-          <div class="neighbor-name">${name}</div>
-          <div class="neighbor-id">ת"ז: ${idNum}</div>
+          <div class="houseMember-name">${name}</div>
+          <div class="houseMember-id">ת"ז: ${idNum}</div>
         </div>
-        <div class="neighbor-expand">▼</div>
+        <div class="houseMember-expand">▼</div>
       </div>
-      <div class="neighbor-body">
+      <div class="houseMember-body">
         <div class="card" style="margin-bottom:10px;box-shadow:none;border:1.5px solid var(--border)">
           <div class="card-title" style="font-size:12px">💥 מידת הפגיעה</div>
           <div class="radio-group" id="nDamage_${i}">
@@ -1354,7 +1384,7 @@ function buildNeighborsSection() {
           <label>הערות</label>
           <input type="text" id="nNotes_${i}" placeholder="הערות נוספות..."/>
         </div>
-        <button class="btn btn-success btn-sm" onclick="saveNeighbor(${i},'${id}')">💾 שמור שכן זה</button>
+        <button class="btn btn-success btn-sm" onclick="saveNeighbor(${i},'${id}')">💾 שמור בן בית זה</button>
       </div>
     `;
     list.appendChild(div);
@@ -1374,7 +1404,7 @@ function saveNeighbor(i, recordId) {
     healthStatus: document.getElementById(`nHealth_${i}`)?.value,
     notes: document.getElementById(`nNotes_${i}`)?.value
   };
-  state.neighborAnswers[recordId] = data;
+  state.houseMemberAnswers[recordId] = data;
   document.getElementById(`ncard_${i}`).classList.add('answered');
   document.getElementById(`ncard_${i}`).classList.remove('open');
   showToast('✓ נשמר', 'success');
@@ -1395,7 +1425,7 @@ function buildSummary() {
     ['קופ"ח', getRadioValue('healthFundGroup') || '—'],
     ['צורך רפואי', getRadioValue('medicalGroup') || '—'],
     ['שהייה', getRadioValue('housingGroup') || '—'],
-    ['שכנים שנענו', Object.keys(state.neighborAnswers).length + ' / ' + (state.neighbors?.length || 0)]
+    ['בני בית שנענו', Object.keys(state.houseMemberAnswers).length + ' / ' + (state.housemates?.length || 0)]
   ];
 
   document.getElementById('summaryContent').innerHTML = rows.map(([k,v]) =>
@@ -1441,10 +1471,10 @@ async function submitAll() {
     pets: document.getElementById('pets').value,
     housingAssistance: getRadioValue('housingGroup'),
     additionalNeeds: document.getElementById('additionalNeeds').value,
-    vulnerableNeighbors: document.getElementById('vulnerableNeighbors').value,
-    neighborDistress: document.getElementById('neighborDistress').value,
+    vulnerableHousemates: document.getElementById('vulnerableHousemates').value,
+    houseMemberDistress: document.getElementById('houseMemberDistress').value,
     datasource: 'שטח',
-    neighborUpdates: Object.values(state.neighborAnswers)
+    houseMemberUpdates: Object.values(state.houseMemberAnswers)
   };
 
   showLoading('שומר נתונים...');
@@ -1468,7 +1498,7 @@ async function submitAll() {
     <div class="summary-row"><span>שם</span><strong>${payload.fullName}</strong></div>
     <div class="summary-row"><span>ת"ז</span><strong>${payload.identityNumber}</strong></div>
     <div class="summary-row"><span>כתובת</span><strong>${payload.streetName} ${payload.houseNumber}</strong></div>
-    <div class="summary-row"><span>שכנים שעודכנו</span><strong>${Object.keys(state.neighborAnswers).length}</strong></div>
+    <div class="summary-row"><span>בני בית שעודכנו</span><strong>${Object.keys(state.houseMemberAnswers).length}</strong></div>
   `;
 
   goToSection(5);
@@ -1520,7 +1550,7 @@ function goNext() {
   if (n === 1) {
     goToSection(2);
   } else if (n === 2) {
-    buildNeighborsSection();
+    buildHousematesSection();
     goToSection(3);
   } else if (n === 3) {
     buildSummary();
@@ -1535,7 +1565,7 @@ function goBack() {
 }
 
 function resetAll() {
-  state = { currentSection: 0, isNew: false, record: null, neighbors: [], neighborAnswers: {} };
+  state = { currentSection: 0, isNew: false, record: null, housemates: [], houseMemberAnswers: {} };
   clearForm();
   document.getElementById('searchID').value = '';
   document.querySelectorAll('.radio-item').forEach(r => r.classList.remove('selected'));
