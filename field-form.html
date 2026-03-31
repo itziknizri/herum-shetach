@@ -608,11 +608,21 @@
     <p>הכנס תעודת זהות של התושב כדי לאחזר את פרטיו מהמערכת</p>
     <div class="id-input-wrap">
       <input type="number" id="searchID" placeholder="000000000" maxlength="9" inputmode="numeric"
-             oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"/>
+             oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
+             onkeydown="if(event.key==='Enter') searchResident()"/>
     </div>
     <button class="btn btn-primary" onclick="searchResident()">🔍 חפש תושב</button>
-    <div style="margin-top:10px">
-      <button class="btn btn-outline btn-sm" style="width:auto;margin:0 auto" onclick="newResident()">+ הוסף תושב חדש</button>
+    
+    <!-- מוצג רק אחרי חיפוש כושל -->
+    <div id="notFoundMsg" style="display:none; margin-top:16px">
+      <div style="
+        background:#fff8e1; border:1.5px solid #ffe082;
+        border-radius:10px; padding:14px; margin-bottom:12px;
+        font-size:14px; color:#795548;
+      ">⚠️ תושב לא נמצא ברשימה</div>
+      <button class="btn btn-outline" onclick="newResident()">
+        ➕ הוסף תושב חדש
+      </button>
     </div>
   </div>
 </div>
@@ -704,6 +714,11 @@
         <input type="number" id="apartmentNumber" placeholder="0" inputmode="numeric" min="0"/>
       </div>
     </div>
+  </div>
+  <div style="padding:16px">
+    <button class="btn btn-primary" onclick="goNext()" style="font-size:17px;padding:17px">
+      המשך לשאלון האירוע ←
+    </button>
   </div>
   <div class="footer-spacer"></div>
 </div>
@@ -875,6 +890,11 @@
       <textarea id="houseMemberDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
     </div>
   </div>
+  <div style="padding:16px">
+    <button class="btn btn-primary" onclick="goNext()" style="font-size:17px;padding:17px">
+      המשך לבני הבית ←
+    </button>
+  </div>
   <div class="footer-spacer"></div>
 </div>
 
@@ -893,6 +913,11 @@
   <div class="card" id="noHousematesCard" style="display:none; text-align:center; padding:30px">
     <div style="font-size:36px; margin-bottom:10px">✅</div>
     <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
+  </div>
+  <div style="padding:16px">
+    <button class="btn btn-primary" onclick="goNext()" style="font-size:17px;padding:17px">
+      המשך לאישור ←
+    </button>
   </div>
   <div class="footer-spacer"></div>
 </div>
@@ -1106,6 +1131,9 @@ document.addEventListener('keydown', (e) => {
 // SEARCH
 // =============================================
 async function searchResident() {
+  // הסתר הודעת "לא נמצא" מחיפוש קודם
+  document.getElementById('notFoundMsg').style.display = 'none';
+  
   const id = document.getElementById('searchID').value.trim();
   if (!id || id.length < 5) {
     showToast('נא להזין תעודת זהות תקינה', 'error');
@@ -1132,8 +1160,12 @@ async function searchResident() {
       state.housemates = [];
       clearForm();
       document.getElementById('identityNumber').value = id;
-      showToast('תושב לא נמצא — ממלאים פרטים חדשים', 'error');
+      showToast('תושב לא נמצא', 'error');
+      // הצג כפתור "תושב חדש" — לא עובר אוטומטית
+      document.getElementById('notFoundMsg').style.display = 'block';
+      return;
     }
+    // תושב נמצא — עבור אוטומטית לפרטים האישיים
     setTimeout(() => goToSection(1), 600);
   } catch(e) {
     hideLoading();
@@ -1178,7 +1210,10 @@ function demoSearch(id) {
     clearForm();
     document.getElementById('identityNumber').value = id;
     showToast('תושב לא נמצא — מצב הדגמה', 'error');
+    document.getElementById('notFoundMsg').style.display = 'block';
+    return;
   }
+  // נמצא — עבור אוטומטית
   setTimeout(() => goToSection(1), 600);
 }
 
@@ -1522,7 +1557,7 @@ function goToSection(n) {
   }
 
   stepsBar.style.display = 'flex';
-  navFooter.style.display = 'flex';
+  navFooter.style.display = 'none'; // כפתורים בתוך הסקשן עצמו
 
   // update steps
   const stepMap = [null,'step1item','step2item','step3item','step4item',null];
