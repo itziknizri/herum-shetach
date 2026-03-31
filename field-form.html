@@ -666,6 +666,1802 @@
 
 <!-- STEPS BAR -->
 <div class="steps-bar" id="stepsBar" style="display:none">
+  <div class="step-item" id="step1item">
+    <div class="step-num">1</div> פרטים
+  </div>
+  <div class="step-arrow">›</div>
+  <div class="step-item" id="step2item">
+    <div class="step-num">2</div> שאלון
+  </div>
+  <div class="step-arrow">›</div>
+  <div class="step-item" id="step3item">
+    <div class="step-num">3</div> בני בית
+  </div>
+  <div class="step-arrow">›</div>
+  <div class="step-item" id="step4item">
+    <div class="step-num">4</div> אישור
+  </div>
+</div>
+
+<!-- ======= SECTION 0: SEARCH ======= -->
+<div class="section active" id="sec0">
+  <div class="search-card">
+    <div class="search-icon">🔍</div>
+    <h2>חיפוש תושב</h2>
+    <p>הכנס תעודת זהות של התושב כדי לאחזר את פרטיו מהמערכת</p>
+    <div class="id-input-wrap">
+      <input type="number" id="searchID" placeholder="000000000" maxlength="9" inputmode="numeric"
+             oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
+             onkeydown="if(event.key==='Enter') searchResident()"/>
+    </div>
+    <button class="btn btn-primary" onclick="searchResident()">🔍 חפש תושב</button>
+    
+    <!-- מוצג רק אחרי חיפוש כושל -->
+    <div id="notFoundMsg" style="display:none; margin-top:16px">
+      <div style="
+        background:#fff8e1; border:1.5px solid #ffe082;
+        border-radius:10px; padding:14px; margin-bottom:12px;
+        font-size:14px; color:#795548;
+      ">⚠️ תושב לא נמצא ברשימה</div>
+      <button class="btn btn-outline" onclick="newResident()">
+        ➕ הוסף תושב חדש
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= SECTION 1: PERSONAL DETAILS ======= -->
+<div class="section" id="sec1">
+  <div class="resident-card" id="residentCard">
+    <!-- filled dynamically -->
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 פרטי ממלא הפנייה</div>
+    <div class="field">
+      <label>שם ממלא הפנייה (איש שטח)</label>
+      <input type="text" id="interviewerName" placeholder="שם מלא"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">👤 פרטים אישיים</div>
+    <div class="field-row">
+      <div class="field">
+        <label><span class="req">*</span> שם פרטי</label>
+        <input type="text" id="firstName" placeholder="שם פרטי"/>
+      </div>
+      <div class="field">
+        <label><span class="req">*</span> שם משפחה</label>
+        <input type="text" id="lastName" placeholder="שם משפחה"/>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>תעודת זהות</label>
+        <input type="text" id="identityNumber" readonly style="background:#f0f4ff;color:#2B3A8F;font-weight:700"/>
+      </div>
+      <div class="field">
+        <label>גיל</label>
+        <input type="number" id="age" placeholder="גיל" inputmode="numeric" min="0" max="120"/>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>מגדר</label>
+        <select id="gender">
+          <option value="">בחר...</option>
+          <option value="זכר">זכר</option>
+          <option value="נקבה">נקבה</option>
+          <option value="אחר">אחר</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>מס׳ ילדים כולל</label>
+        <input type="number" id="totalChildren" placeholder="0" inputmode="numeric" min="0"/>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>טלפון 1</label>
+        <input type="tel" id="phone1" placeholder="05X-XXXXXXX" inputmode="tel"/>
+      </div>
+      <div class="field">
+        <label>טלפון 2</label>
+        <input type="tel" id="phone2" placeholder="אופציונלי" inputmode="tel"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>כתובת דואר אלקטרוני</label>
+      <input type="email" id="email" placeholder="example@email.com" inputmode="email"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏠 כתובת מגורים</div>
+    <div class="field">
+      <label><span class="req">*</span> שם רחוב</label>
+      <input type="text" id="streetName" placeholder="שם הרחוב"/>
+    </div>
+    <div class="field-row-3">
+      <div class="field">
+        <label><span class="req">*</span> מספר בית</label>
+        <input type="text" id="houseNumber" placeholder="מספר" inputmode="numeric"/>
+      </div>
+      <div class="field">
+        <label>קומה</label>
+        <input type="number" id="floor" placeholder="0" inputmode="numeric" min="0"/>
+      </div>
+      <div class="field">
+        <label>דירה</label>
+        <input type="number" id="apartmentNumber" placeholder="0" inputmode="numeric" min="0"/>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📝 הערות</div>
+    <div class="field">
+      <label>הערות חופשיות</label>
+      <textarea id="notes" placeholder="הוסף כל מידע נוסף רלוונטי..." style="min-height:120px"></textarea>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goToSection(0);document.getElementById('searchToggleBtn').style.display='none';">→ חיפוש</button>
+    <button class="btn btn-primary btn-next" onclick="goNextWithWarning(1)">המשך לשאלון האירוע ←</button>
+  </div>
+  <div class="footer-spacer"></div>
+</div>
+
+<!-- ======= SECTION 2: QUESTIONNAIRE ======= -->
+<div class="section" id="sec2">
+
+  <div class="card">
+    <div class="card-title">📍 סטטוס מיקום</div>
+    <div class="radio-group" id="locationGroup">
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'לא אותר')">
+        <input type="radio" name="location" value="לא אותר"/>
+        <div class="radio-dot"></div>
+        <span>לא אותר</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'נעדר')">
+        <input type="radio" name="location" value="נעדר"/>
+        <div class="radio-dot"></div>
+        <span>נעדר</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'לכוד')">
+        <input type="radio" name="location" value="לכוד"/>
+        <div class="radio-dot"></div>
+        <span style="color:var(--accent);font-weight:700">לכוד</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('locationGroup',this,'נמצא')">
+        <input type="radio" name="location" value="נמצא"/>
+        <div class="radio-dot"></div>
+        <span>נמצא</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏥 סטטוס בריאות</div>
+    <div class="radio-group" id="healthStatusGroup">
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'בריא')">
+        <input type="radio" name="healthStatus" value="בריא"/>
+        <div class="radio-dot"></div>
+        <span>בריא</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פצוע')">
+        <input type="radio" name="healthStatus" value="פצוע"/>
+        <div class="radio-dot"></div>
+        <span style="color:#e67e22;font-weight:700">פצוע</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'פונה')">
+        <input type="radio" name="healthStatus" value="פונה"/>
+        <div class="radio-dot"></div>
+        <span>פונה</span>
+      </label>
+      <label class="radio-item" onclick="selectRadio('healthStatusGroup',this,'נפטר')">
+        <input type="radio" name="healthStatus" value="נפטר"/>
+        <div class="radio-dot"></div>
+        <span style="color:var(--accent);font-weight:700">נפטר</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💥 מידת הפגיעה בבית</div>
+    <div class="radio-group" id="damageGroup">
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'הדף')">
+        <input type="radio" name="damage" value="הדף"/>
+        <div class="radio-dot"></div> הדף
+      </label>
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'רסיסים בלבד')">
+        <input type="radio" name="damage" value="רסיסים בלבד"/>
+        <div class="radio-dot"></div> רסיסים בלבד
+      </label>
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'נזקים לתשתיות - כמו תקרה וחשמל')">
+        <input type="radio" name="damage" value="נזקים לתשתיות"/>
+        <div class="radio-dot"></div> נזקים לתשתיות (תקרה, חשמל וכד׳)
+      </label>
+      <label class="radio-item" onclick="selectRadio('damageGroup',this,'הרס מוחלט')">
+        <input type="radio" name="damage" value="הרס מוחלט"/>
+        <div class="radio-dot"></div> הרס מוחלט
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">👨‍👩‍👧 נפשות ונעדרים</div>
+    <div class="field">
+      <label>נפשות שפונו מהבית (שם וגיל)</label>
+      <textarea id="evacuatedPersons" placeholder="לדוגמה: דוד 45, רחל 42, יוסי 12..."></textarea>
+    </div>
+    <div class="field">
+      <label>האם יש נעדרים ששהו במבנה? פרט</label>
+      <input type="text" id="missingPersons" placeholder="שמות / פרטים"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏥 מידע רפואי</div>
+    <div class="field">
+      <label>קופת חולים</label>
+      <div class="radio-group horizontal" id="healthFundGroup">
+        <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'כללית')">
+          <input type="radio" name="hf" value="כללית"/>
+          <div class="radio-dot"></div> כללית
+        </label>
+        <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'מאוחדת')">
+          <input type="radio" name="hf" value="מאוחדת"/>
+          <div class="radio-dot"></div> מאוחדת
+        </label>
+        <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'מכבי')">
+          <input type="radio" name="hf" value="מכבי"/>
+          <div class="radio-dot"></div> מכבי
+        </label>
+        <label class="radio-item" onclick="selectRadio('healthFundGroup',this,'לאומית')">
+          <input type="radio" name="hf" value="לאומית"/>
+          <div class="radio-dot"></div> לאומית
+        </label>
+      </div>
+    </div>
+    <div class="field" style="margin-top:14px">
+      <label>האם יש צורך רפואי? (תרופות, קביים וכד׳)</label>
+      <div class="radio-group horizontal" id="medicalGroup">
+        <label class="radio-item" onclick="selectRadio('medicalGroup',this,'כן')">
+          <input type="radio" name="med" value="כן"/>
+          <div class="radio-dot"></div> כן
+        </label>
+        <label class="radio-item" onclick="selectRadio('medicalGroup',this,'לא')">
+          <input type="radio" name="med" value="לא"/>
+          <div class="radio-dot"></div> לא
+        </label>
+        <label class="radio-item" onclick="selectRadio('medicalGroup',this,'אחר')">
+          <input type="radio" name="med" value="אחר"/>
+          <div class="radio-dot"></div> אחר
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🐾 חיות מחמד ושהייה</div>
+    <div class="field">
+      <label>חיות מחמד שנפגעו / נשארו (סוג וכמות)</label>
+      <input type="text" id="pets" placeholder="לדוגמה: כלב 1, חתול 2..."/>
+    </div>
+    <div class="field">
+      <label>עזרה במקום שהייה</label>
+      <div class="radio-group horizontal" id="housingGroup">
+        <label class="radio-item" onclick="selectRadio('housingGroup',this,'יש מקום')">
+          <input type="radio" name="housing" value="יש מקום"/>
+          <div class="radio-dot"></div> יש מקום
+        </label>
+        <label class="radio-item" onclick="selectRadio('housingGroup',this,'צריכים סיוע')">
+          <input type="radio" name="housing" value="צריכים סיוע"/>
+          <div class="radio-dot"></div> צריכים סיוע
+        </label>
+      </div>
+    </div>
+    <div class="field" style="margin-top:14px">
+      <label>צרכים נוספים</label>
+      <textarea id="additionalNeeds" placeholder="תאר צרכים נוספים..."></textarea>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
+    <button class="btn btn-primary btn-next" onclick="goNextWithWarning(2)">המשך לבני הבית ←</button>
+  </div>
+  <div class="footer-spacer"></div>
+</div>
+
+<!-- ======= SECTION 3: NEIGHBORS ======= -->
+<div class="section" id="sec3">
+  <div class="housemates-banner">
+    <div class="housemates-banner-icon">🏠</div>
+    <div>
+      <h3 id="housematesTitle">נמצאו בני בית</h3>
+      <p id="housematesSubtitle">אנא בדוק את שלומם וענה על השאלות עבורם</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏘️ מידע כללי על בני הבית</div>
+    <div class="field">
+      <label>בני בית עם מגבלות פיזיות / צרכים מיוחדים</label>
+      <textarea id="vulnerableHousemates" placeholder="קשישים, נכים, ילדים ללא ליווי..."></textarea>
+    </div>
+    <div class="field">
+      <label>סימני מצוקה בבני הבית שנותרו בבניין</label>
+      <textarea id="houseMemberDistress" placeholder="ניסיונות חילוץ, סימני פציעה, קריאות לעזרה..."></textarea>
+    </div>
+  </div>
+
+  <div id="housematesList"></div>
+
+  <div class="card" id="noHousematesCard" style="display:none; text-align:center; padding:30px">
+    <div style="font-size:36px; margin-bottom:10px">✅</div>
+    <p style="color:var(--gray); font-size:15px">לא נמצאו תושבים נוספים רשומים באותה דירה</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
+    <button class="btn btn-primary btn-next" onclick="goNextWithWarning(3)">המשך לאישור ←</button>
+  </div>
+  <div class="footer-spacer"></div>
+</div>
+
+<!-- ======= SECTION 4: CONFIRM ======= -->
+<div class="section" id="sec4">
+  <div class="card">
+    <div class="card-title">📋 סיכום לפני שמירה</div>
+    <div id="summaryContent"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✅ אישורים</div>
+    <div class="confirm-item" id="conf1" onclick="toggleConfirm(this)">
+      <div class="confirm-check" id="check1"></div>
+      <span>הקפדתי על סביבה רגועה ותומכת ועל כתיבה ברורה וקריאה</span>
+    </div>
+    <div class="confirm-item" id="conf2" onclick="toggleConfirm(this)">
+      <div class="confirm-check" id="check2"></div>
+      <span>המידע שמולאו הוא מדויק ומבוסס על דברי התושב</span>
+    </div>
+    <div class="confirm-item" id="conf3" onclick="toggleConfirm(this)">
+      <div class="confirm-check" id="check3"></div>
+      <span>במידה ועלה נושא מס רכוש — הפניתי למילוי טופס מקוון</span>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-outline btn-back" onclick="goBack()">→ חזור</button>
+    <button class="btn btn-success btn-next" onclick="submitAll()" id="btnSubmit">💾 שמור ושלח</button>
+  </div>
+  <div class="footer-spacer"></div>
+</div>
+
+<!-- ======= SECTION 5: SUCCESS ======= -->
+<div class="section" id="sec5">
+  <div class="success-screen">
+    <div class="success-icon">✅</div>
+    <h2>הנתונים נשמרו!</h2>
+    <p id="successMsg">הרשומה עודכנה בהצלחה במערכת החירום</p>
+    <div class="summary-box" id="finalSummary"></div>
+    <button class="btn btn-primary" onclick="resetAll()">🔄 תושב הבא</button>
+  </div>
+</div>
+
+<!-- NAV FOOTER -->
+<div class="nav-footer" id="navFooter" style="display:none">
+  <button class="btn btn-outline" id="btnBack" onclick="goBack()">→ חזרה</button>
+  <button class="btn btn-primary" id="btnNext" onclick="goNext()">המשך ←</button>
+</div>
+
+<!-- INCOMPLETE FIELDS DIALOG -->
+<div id="incompleteOverlay" style="
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.6);
+  z-index:9999;
+  align-items:flex-end;
+  justify-content:center;
+  padding:20px;
+">
+  <div style="
+    background:white;
+    border-radius:20px 20px 16px 16px;
+    width:100%; max-width:480px;
+    padding:24px 20px;
+    animation: slideUp 0.3s ease;
+  ">
+    <h3 style="font-size:18px;font-weight:800;color:#2B3A8F;margin-bottom:6px">
+      ⚠️ שדות לא מולאו
+    </h3>
+    <p style="font-size:14px;color:#666;margin-bottom:16px">
+      השדות הבאים נשארו ריקים — ניתן להמשיך או לחזור ולמלא:
+    </p>
+    <div id="incompleteList" style="margin-bottom:20px;max-height:200px;overflow-y:auto"></div>
+    <div style="display:flex;gap:10px">
+      <button onclick="backToForm()" style="
+        flex:1; padding:14px;
+        background:#f0f4ff;
+        border:2px solid #2B3A8F;
+        border-radius:12px;
+        color:#2B3A8F;
+        font-size:15px; font-weight:700;
+        font-family:'Assistant',sans-serif;
+        cursor:pointer;
+      ">← חזור לטופס</button>
+      <button onclick="continueAnyway()" style="
+        flex:1; padding:14px;
+        background:#2B3A8F;
+        border:none; border-radius:12px;
+        color:white;
+        font-size:15px; font-weight:700;
+        font-family:'Assistant',sans-serif;
+        cursor:pointer;
+      ">דלג והמשך ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">מחפש...</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// =============================================
+// CONFIGURATION — עדכן את ה-URL של ה-Flow
+// =============================================
+// קריאת מזהה האירוע מה-URL בלבד
+const _urlParams = new URLSearchParams(window.location.search);
+const _eventFromURL = _urlParams.get('event') || _urlParams.get('eventId') || _urlParams.get('id');
+
+const CONFIG = {
+  // Flow לחיפוש תושב לפי ת"ז
+  SEARCH_FLOW_URL: 'https://58680756e80ae00ebd0a06d0c2bf5c.5e.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/5de0d951b98f4b649f69a1086d31b8ba/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=LfkN-e9rHtfkokT5h4UMgheJkzuDQh3RsLgggASDg8o',
+  
+  // Flow לשמירת/עדכון תושב
+  SAVE_FLOW_URL: 'https://prod-XX.westeurope.logic.azure.com/workflows/YYYY/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YYYY',
+  
+  // מזהה האירוע — נקרא מה-URL: field-form.html?event=EVT-001
+  EVENT_ID: _eventFromURL || 'EVT-UNKNOWN',
+
+  // קוד גישה — המשתמש מקליד אותו במסך הכניסה
+  // שנה כאן כדי לעדכן את הקוד
+  ACCESS_CODE: '12345678'
+};
+
+// =============================================
+// STATE
+// =============================================
+let state = {
+  currentSection: 0,
+  isNew: false,
+  record: null,
+  housemates: [],
+  houseMemberAnswers: {} // { recordId: { damageLevel, ... } }
+};
+
+// =============================================
+// INIT
+// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+  // בדוק אם יש טוקן תקף ב-localStorage
+  try {
+    const saved = localStorage.getItem('fieldFormAuth');
+    if (saved) {
+      const { code, expiry } = JSON.parse(saved);
+      if (code === CONFIG.ACCESS_CODE && Date.now() < expiry) {
+        // טוקן תקף — דלג על מסך כניסה
+        document.getElementById('loginScreen').style.display = 'none';
+        document.querySelector('.header').style.display = '';
+        if (CONFIG.EVENT_ID === 'EVT-UNKNOWN') {
+          document.getElementById('eventLabel').textContent = '⚠️ לא נבחר אירוע!';
+          document.getElementById('eventLabel').style.color = '#ff6b6b';
+        } else {
+          document.getElementById('eventLabel').textContent = 'אירוע פעיל: ' + CONFIG.EVENT_ID;
+        }
+        document.getElementById('sec0').style.display = 'block';
+        document.getElementById('sec0').classList.add('active');
+        // רענן תפוגה לשעה נוספת
+        const newExpiry = Date.now() + (60 * 60 * 1000);
+        localStorage.setItem('fieldFormAuth', JSON.stringify({ code, expiry: newExpiry }));
+        return;
+      } else {
+        localStorage.removeItem('fieldFormAuth');
+      }
+    }
+  } catch(e) {
+    localStorage.removeItem('fieldFormAuth');
+  }
+  // אין טוקן תקף — הצג מסך כניסה
+  showLoginScreen();
+});
+
+function showLoginScreen() {
+  // הסתר את כל תוכן הדף
+  document.querySelector('.header').style.display = 'none';
+  document.getElementById('stepsBar').style.display = 'none';
+  document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+  document.getElementById('navFooter').style.display = 'none';
+
+  // הצג מסך כניסה
+  const loginDiv = document.getElementById('loginScreen');
+  loginDiv.style.display = 'flex';
+
+  // פוקוס אוטומטי על שדה הקוד
+  setTimeout(() => {
+    const inp = document.getElementById('accessCodeInput');
+    if (inp) inp.focus();
+  }, 300);
+}
+
+function submitAccessCode() {
+  const entered = document.getElementById('accessCodeInput').value.trim();
+  const errorEl = document.getElementById('loginError');
+  const attempts = parseInt(sessionStorage.getItem('loginAttempts') || '0');
+
+  // חסימה אחרי 5 ניסיונות כושלים
+  if (attempts >= 5) {
+    errorEl.textContent = '🔒 יותר מדי ניסיונות. רענן את הדף.';
+    errorEl.style.display = 'block';
+    document.getElementById('accessCodeInput').disabled = true;
+    document.getElementById('btnLogin').disabled = true;
+    return;
+  }
+
+  if (entered === CONFIG.ACCESS_CODE) {
+    // הצלחה — שמור טוקן ב-localStorage לשעה
+    sessionStorage.removeItem('loginAttempts');
+    const expiry = Date.now() + (60 * 60 * 1000); // שעה אחת
+    localStorage.setItem('fieldFormAuth', JSON.stringify({ code: entered, expiry }));
+    document.getElementById('loginScreen').style.display = 'none';
+    document.querySelector('.header').style.display = '';
+
+    // בדיקת אירוע
+    if (CONFIG.EVENT_ID === 'EVT-UNKNOWN') {
+      document.getElementById('eventLabel').textContent = '⚠️ לא נבחר אירוע!';
+      document.getElementById('eventLabel').style.color = '#ff6b6b';
+      setTimeout(() => showToast('שגיאה: חסר מזהה אירוע בקישור. פנה למוקדן.', 'error'), 300);
+    } else {
+      document.getElementById('eventLabel').textContent = 'אירוע פעיל: ' + CONFIG.EVENT_ID;
+    }
+
+    // הצג section 0
+    document.getElementById('sec0').style.display = 'block';
+    document.getElementById('sec0').classList.add('active');
+
+  } else {
+    // כישלון
+    sessionStorage.setItem('loginAttempts', attempts + 1);
+    const remaining = 4 - attempts;
+    errorEl.textContent = remaining > 0
+      ? `קוד שגוי. נותרו ${remaining} ניסיונות.`
+      : 'קוד שגוי. ניסיון אחרון!';
+    errorEl.style.display = 'block';
+    document.getElementById('accessCodeInput').value = '';
+    document.getElementById('accessCodeInput').focus();
+
+    // רטט על מובייל
+    document.getElementById('loginCard').style.animation = 'shake 0.4s ease';
+    setTimeout(() => document.getElementById('loginCard').style.animation = '', 400);
+  }
+}
+
+// Enter מפעיל כניסה
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
+    submitAccessCode();
+  }
+});
+
+// =============================================
+// SEARCH
+// =============================================
+async function searchResident() {
+  // הסתר הודעת "לא נמצא" מחיפוש קודם
+  document.getElementById('notFoundMsg').style.display = 'none';
+  
+  const id = document.getElementById('searchID').value.trim();
+  if (!id || id.length < 5) {
+    showToast('נא להזין תעודת זהות תקינה', 'error');
+    return;
+  }
+  showLoading('מחפש תושב...');
+  try {
+    const res = await fetch(CONFIG.SEARCH_FLOW_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accessCode: CONFIG.ACCESS_CODE, action: 'search', identityNumber: id, eventId: CONFIG.EVENT_ID })
+    });
+    const data = await res.json();
+    hideLoading();
+    if (data.found) {
+      state.record = data.record;
+      state.isNew = false;
+      // המרת אובייקטי Dataverse גולמיים לפורמט פשוט
+      const rawNeighbors = data.neighbors || data.housemates || [];
+      state.housemates = rawNeighbors.map(n => {
+        // Dataverse מחזיר שדות עם @odata.type לפני ה-GUID
+        // צריך לחפש את השדה ישירות בלי ה-annotation
+        const recordId = n['new_individualdemographicrecordid'] || n.recordId || '';
+        return {
+          recordId,
+          fullName: n['new_fullname'] || n.fullName || 'לא ידוע',
+          identityNumber: n['new_identitynumber'] || n.identityNumber || '',
+          streetName: (n['new_streetname'] || '').trim(),
+          houseNumber: n['new_housenumber'] || '',
+          apartmentNumber: n['new_apartmentnumber'] || '',
+          floor: n['new_floor'] || '',
+          primaryPhone: n['new_primaryphone'] || '',
+          age: n['new_age'] || '',
+          gender: n['new_gender'] || '',
+          locationStatus: n['cr908_new_locationstatus@OData.Community.Display.V1.FormattedValue'] || '',
+          healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || '',
+        };
+      });
+      console.log('בני בית שנמצאו:', state.housemates.length, state.housemates);
+      fillFormFromRecord(data.record);
+      showToast('תושב נמצא: ' + data.record.fullName, 'success');
+    } else {
+      state.record = null;
+      state.isNew = true;
+      state.housemates = [];
+      clearForm();
+      document.getElementById('identityNumber').value = id;
+      showToast('תושב לא נמצא', 'error');
+      // הצג כפתור "תושב חדש" — לא עובר אוטומטית
+      document.getElementById('notFoundMsg').style.display = 'block';
+      return;
+    }
+    // תושב נמצא — עבור אוטומטית לפרטים האישיים
+    setTimeout(() => goToSection(1), 600);
+  } catch(e) {
+    hideLoading();
+    // Demo mode — מצב הדגמה ללא Flow
+    demoSearch(id);
+  }
+}
+
+function demoSearch(id) {
+  // נתוני דמו לבדיקה
+  const demo = {
+    '111111111': {
+      fullName: 'כהן דוד', firstName: 'דוד', lastName: 'כהן',
+      primaryPhone: '052-1111111', secondaryPhone: '',
+      emailAddress: 'cohen@test.com',
+      streetName: 'הרצל', houseNumber: '10', floor: '3', apartmentNumber: '3',
+      recordId: 'd270130b-772c-f111-88b3-002248994e78'
+    },
+    '333333333': {
+      fullName: 'לוי משה', firstName: 'משה', lastName: 'לוי',
+      primaryPhone: '', secondaryPhone: '',
+      emailAddress: 'levi@test.com',
+      streetName: 'הרצל', houseNumber: '10', floor: '', apartmentNumber: '4',
+      recordId: 'd370130b-772c-f111-88b3-002248994e78'
+    }
+  };
+  const found = demo[id];
+  if (found) {
+    state.record = found;
+    state.isNew = false;
+    // בדיקת בני בית דמו — אותו רחוב+בית+דירה
+    state.housemates = [];
+    if (found.streetName === 'הרצל' && found.houseNumber === '10') {
+      // דמו: בני בית בבניין אחר
+    }
+    fillFormFromRecord(found);
+    showToast('תושב נמצא: ' + found.fullName + ' (מצב הדגמה)', 'success');
+  } else {
+    state.record = null;
+    state.isNew = true;
+    state.housemates = [];
+    clearForm();
+    document.getElementById('identityNumber').value = id;
+    showToast('תושב לא נמצא — מצב הדגמה', 'error');
+    document.getElementById('notFoundMsg').style.display = 'block';
+    return;
+  }
+  // נמצא — עבור אוטומטית
+  setTimeout(() => goToSection(1), 600);
+}
+
+function newResident() {
+  state.record = null;
+  state.isNew = true;
+  state.housemates = [];
+  clearForm();
+  goToSection(1);
+}
+
+// =============================================
+// FILL / CLEAR FORM
+// =============================================
+function fillFormFromRecord(r) {
+  const prefill = (id, val) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = val || '';
+    if (val) el.classList.add('prefilled'); else el.classList.remove('prefilled');
+  };
+
+  // שם — פיצול מ-fullName אם אין firstName/lastName
+  if (r.firstName && r.lastName) {
+    prefill('firstName', r.firstName);
+    prefill('lastName', r.lastName);
+  } else if (r.fullName) {
+    const parts = r.fullName.trim().split(' ');
+    prefill('firstName', parts[0] || '');
+    prefill('lastName', parts.slice(1).join(' ') || '');
+  }
+
+  prefill('identityNumber', r.identityNumber || r.new_identitynumber || state.record?.identityNumber);
+  prefill('phone1', r.primaryPhone || r.new_primaryphone || '');
+  prefill('phone2', r.secondaryPhone || r.new_secondaryphone || '');
+  prefill('email', r.emailAddress || r.new_emailaddress || '');
+  prefill('streetName', r.streetName || r.new_streetname || '');
+  prefill('houseNumber', r.houseNumber || r.new_housenumber || '');
+  prefill('floor', r.floor !== undefined ? r.floor : (r.new_floor !== undefined ? r.new_floor : ''));
+  prefill('apartmentNumber', r.apartmentNumber || r.new_apartmentnumber || '');
+  prefill('age', r.age || r.new_age || '');
+  prefill('gender', r.gender || r.new_gender || '');
+  prefill('totalChildren', r.totalChildren || r.new_totalchildren || '');
+  prefill('notes', r.notes || r.new_notes || '');
+
+  updateResidentCard(r, false);
+  // עדכן שם בכפתור זכוכית מגדלת
+  const resName = r.fullName || ((r.firstName||'') + ' ' + (r.lastName||'')) || 'תושב';
+  const nameEl = document.getElementById('currentResidentName');
+  if (nameEl) nameEl.textContent = resName.trim().split(' ')[0]; // שם פרטי בלבד
+}
+
+function clearForm() {
+  ['firstName','lastName','phone1','phone2','email','streetName','houseNumber','floor','apartmentNumber',
+   'age','gender','totalChildren',
+   'evacuatedPersons','missingPersons','pets','additionalNeeds','vulnerableHousemates','houseMemberDistress',
+   'interviewerName'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.classList.remove('prefilled'); }
+  });
+  const id = document.getElementById('identityNumber');
+  if (id) id.value = '';
+  updateResidentCard(null, true);
+}
+
+function updateResidentCard(r, isNew) {
+  const card = document.getElementById('residentCard');
+  const name = r ? (r.fullName || ((r.firstName||'') + ' ' + (r.lastName||''))) : 'תושב חדש';
+  const idNum = r ? (r.identityNumber || r.new_identitynumber || document.getElementById('searchID')?.value || '') : document.getElementById('searchID')?.value || '';
+  const initials = name.split(' ').map(w => w[0]).filter(Boolean).slice(0,2).join('');
+
+  card.innerHTML = `
+    <div class="resident-card-header">
+      <div class="resident-avatar">${initials || '?'}</div>
+      <div>
+        <div class="resident-name">${name}</div>
+        <div class="resident-id">ת"ז: ${idNum}</div>
+      </div>
+    </div>
+    <div class="resident-status-row">
+      <div class="status-chip ${isNew ? 'chip-new' : 'chip-found'}">
+        ${isNew ? '🆕 רשומה חדשה' : '✅ נמצא במערכת'}
+      </div>
+      ${r && r.streetName ? `<span style="font-size:12px;color:var(--gray)">📍 ${r.streetName} ${r.houseNumber || ''}</span>` : ''}
+    </div>
+  `;
+}
+
+// =============================================
+// RADIO / CHECKBOX HELPERS
+// =============================================
+function selectRadio(groupId, el, value) {
+  document.querySelectorAll(`#${groupId} .radio-item`).forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function getRadioValue(groupId) {
+  const sel = document.querySelector(`#${groupId} .radio-item.selected input`);
+  return sel ? sel.value : '';
+}
+
+function toggleConfirm(el) {
+  el.classList.toggle('checked');
+  const check = el.querySelector('.confirm-check');
+  if (el.classList.contains('checked')) {
+    check.textContent = '✓';
+    check.style.background = 'var(--green)';
+    check.style.borderColor = 'var(--green)';
+    check.style.color = 'white';
+  } else {
+    check.textContent = '';
+    check.style.background = '';
+    check.style.borderColor = '';
+    check.style.color = '';
+  }
+}
+
+// =============================================
+// VALIDATION
+// =============================================
+function validateSection(sec) {
+  if (sec === 1) {
+    const required = [
+      { id: 'firstName', label: 'שם פרטי' },
+      { id: 'lastName', label: 'שם משפחה' },
+      { id: 'streetName', label: 'שם רחוב' },
+      { id: 'houseNumber', label: 'מספר בית' }
+    ];
+    for (const f of required) {
+      const val = document.getElementById(f.id)?.value?.trim();
+      if (!val) {
+        showToast('שדה חובה חסר: ' + f.label, 'error');
+        document.getElementById(f.id)?.focus();
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+// =============================================
+// NEIGHBORS
+// =============================================
+function buildHousematesSection() {
+  const list = document.getElementById('housematesList');
+  const noCard = document.getElementById('noHousematesCard');
+  list.innerHTML = '';
+
+  if (!state.housemates || state.housemates.length === 0) {
+    noCard.style.display = 'block';
+    document.getElementById('housematesTitle').textContent = 'בדיקת בני בית';
+    document.getElementById('housematesSubtitle').textContent = 'לא נמצאו תושבים נוספים רשומים באותה דירה';
+    return;
+  }
+
+  noCard.style.display = 'none';
+  document.getElementById('housematesTitle').textContent = `נמצאו ${state.housemates.length} בני בית`;
+  document.getElementById('housematesSubtitle').textContent = 'אנא בדוק את שלומם וענה על השאלות עבורם';
+
+  state.housemates.forEach((n, i) => {
+    const id = n.new_individualdemographicrecordid || n.recordId || n.id || i;
+    const name = n.new_fullname || n.fullName || 'לא ידוע';
+    const initials = name.split(' ').map(w=>w[0]).filter(Boolean).slice(0,2).join('');
+    const idNum = n.new_identitynumber || n.identityNumber || '';
+
+    const div = document.createElement('div');
+    div.className = 'houseMember-card';
+    div.id = `ncard_${i}`;
+    div.innerHTML = `
+      <div class="houseMember-card-header" onclick="toggleNeighbor(${i})">
+        <div class="houseMember-avatar">${initials}</div>
+        <div>
+          <div class="houseMember-name">${name}</div>
+          <div class="houseMember-id">ת"ז: ${idNum}</div>
+        </div>
+        <div class="houseMember-expand">▼</div>
+      </div>
+      <div class="houseMember-body">
+        <div class="card" style="margin-bottom:10px;box-shadow:none;border:1.5px solid var(--border)">
+          <div class="card-title" style="font-size:12px">💥 מידת הפגיעה</div>
+          <div class="radio-group" id="nDamage_${i}">
+            ${['הדף','רסיסים בלבד','נזקים לתשתיות','הרס מוחלט'].map(v =>
+              `<label class="radio-item" onclick="selectRadio('nDamage_${i}',this,'${v}')">
+                <input type="radio" name="nd${i}" value="${v}"/>
+                <div class="radio-dot"></div> ${v}
+              </label>`
+            ).join('')}
+          </div>
+        </div>
+        <div class="field">
+          <label>סטטוס מיקום</label>
+          <select id="nLocation_${i}">
+            <option value="">לא ידוע</option>
+            <option value="לא אותר">לא אותר</option>
+            <option value="נעדר">נעדר</option>
+            <option value="לכוד">לכוד</option>
+            <option value="נמצא">נמצא</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>סטטוס בריאות</label>
+          <select id="nHealth_${i}">
+            <option value="">לא ידוע</option>
+            <option value="בריא">בריא</option>
+            <option value="פצוע">פצוע</option>
+            <option value="פונה">פונה</option>
+            <option value="נפטר">נפטר</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>הערות</label>
+          <input type="text" id="nNotes_${i}" placeholder="הערות נוספות..."/>
+        </div>
+        <button class="btn btn-success btn-sm" onclick="saveNeighbor(${i},'${id}')">💾 שמור בן בית זה</button>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function toggleNeighbor(i) {
+  const card = document.getElementById(`ncard_${i}`);
+  card.classList.toggle('open');
+}
+
+function saveNeighbor(i, recordId) {
+  const data = {
+    recordId,
+    damageLevel: getRadioValue(`nDamage_${i}`),
+    locationStatus: document.getElementById(`nLocation_${i}`)?.value,
+    healthStatus: document.getElementById(`nHealth_${i}`)?.value,
+    notes: document.getElementById(`nNotes_${i}`)?.value
+  };
+  state.houseMemberAnswers[recordId] = data;
+  document.getElementById(`ncard_${i}`).classList.add('answered');
+  document.getElementById(`ncard_${i}`).classList.remove('open');
+  showToast('✓ נשמר', 'success');
+}
+
+// =============================================
+// SUMMARY
+// =============================================
+function buildSummary() {
+  const rows = [
+    ['שם מלא', (document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value).trim()],
+    ['ת"ז', document.getElementById('identityNumber').value],
+    ['טלפון', document.getElementById('phone1').value],
+    ['כתובת', `${document.getElementById('streetName').value} ${document.getElementById('houseNumber').value}, קומה ${document.getElementById('floor').value}, דירה ${document.getElementById('apartmentNumber').value}`],
+    ['סטטוס מיקום', getRadioValue('locationGroup') || '—'],
+    ['סטטוס בריאות', getRadioValue('healthStatusGroup') || '—'],
+    ['מידת הפגיעה', getRadioValue('damageGroup') || '—'],
+    ['קופ"ח', getRadioValue('healthFundGroup') || '—'],
+    ['צורך רפואי', getRadioValue('medicalGroup') || '—'],
+    ['שהייה', getRadioValue('housingGroup') || '—'],
+    ['בני בית שנענו', Object.keys(state.houseMemberAnswers).length + ' / ' + (state.housemates?.length || 0)]
+  ];
+
+  document.getElementById('summaryContent').innerHTML = rows.map(([k,v]) =>
+    `<div class="summary-row"><span>${k}</span><strong>${v || '—'}</strong></div>`
+  ).join('');
+}
+
+// =============================================
+// SUBMIT
+// =============================================
+async function submitAll() {
+  const c1 = document.getElementById('conf1').classList.contains('checked');
+  const c2 = document.getElementById('conf2').classList.contains('checked');
+  if (!c1 || !c2) {
+    showToast('נא לאשר את שני האישורים הראשונים', 'error');
+    return;
+  }
+
+  const payload = {
+    action: state.isNew ? 'create' : 'update',
+    eventId: CONFIG.EVENT_ID,
+    recordId: state.record?.recordId || state.record?.new_individualdemographicrecordid || null,
+    identityNumber: document.getElementById('identityNumber').value,
+    fullName: (document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim()).trim(),
+    primaryPhone: document.getElementById('phone1').value,
+    secondaryPhone: document.getElementById('phone2').value,
+    emailAddress: document.getElementById('email').value,
+    streetName: document.getElementById('streetName').value,
+    houseNumber: document.getElementById('houseNumber').value,
+    floor: document.getElementById('floor').value,
+    apartmentNumber: document.getElementById('apartmentNumber').value,
+    age: document.getElementById('age').value,
+    gender: document.getElementById('gender').value,
+    totalChildren: document.getElementById('totalChildren').value,
+    interviewerName: document.getElementById('interviewerName').value,
+    locationStatus: getRadioValue('locationGroup'),
+    healthStatus: getRadioValue('healthStatusGroup'),
+    damageLevel: getRadioValue('damageGroup'),
+    evacuatedPersons: document.getElementById('evacuatedPersons').value,
+    missingPersons: document.getElementById('missingPersons').value,
+    healthFund: getRadioValue('healthFundGroup'),
+    medicalNeeds: getRadioValue('medicalGroup'),
+    pets: document.getElementById('pets').value,
+    housingAssistance: getRadioValue('housingGroup'),
+    additionalNeeds: document.getElementById('additionalNeeds').value,
+    vulnerableHousemates: document.getElementById('vulnerableHousemates').value,
+    houseMemberDistress: document.getElementById('houseMemberDistress').value,
+    notes: document.getElementById('notes').value,
+    datasource: 'שטח',
+    houseMemberUpdates: Object.values(state.houseMemberAnswers)
+  };
+
+  showLoading('שומר נתונים...');
+
+  try {
+    await fetch(CONFIG.SAVE_FLOW_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({...payload, accessCode: CONFIG.ACCESS_CODE})
+    });
+    hideLoading();
+  } catch(e) {
+    hideLoading();
+    // demo — המשך בכל מקרה
+  }
+
+  // הצגת מסך הצלחה
+  document.getElementById('successMsg').textContent =
+    state.isNew ? 'רשומה חדשה נוצרה בהצלחה במערכת' : 'הרשומה עודכנה בהצלחה במערכת';
+  document.getElementById('finalSummary').innerHTML = `
+    <div class="summary-row"><span>שם</span><strong>${payload.fullName}</strong></div>
+    <div class="summary-row"><span>ת"ז</span><strong>${payload.identityNumber}</strong></div>
+    <div class="summary-row"><span>כתובת</span><strong>${payload.streetName} ${payload.houseNumber}</strong></div>
+    <div class="summary-row"><span>בני בית שעודכנו</span><strong>${Object.keys(state.houseMemberAnswers).length}</strong></div>
+  `;
+
+  goToSection(5);
+}
+
+// =============================================
+// NAVIGATION
+// =============================================
+function goToSection(n) {
+  // הצג את כל הסקשנים (הסר display:none שנשמר מה-login)
+  document.querySelectorAll('.section').forEach(s => {
+    s.classList.remove('active');
+    s.style.display = ''; // מנקה כל style inline
+  });
+  const target = document.getElementById('sec' + n);
+  target.classList.add('active');
+  target.style.display = 'block';
+  state.currentSection = n;
+
+  const stepsBar = document.getElementById('stepsBar');
+  const navFooter = document.getElementById('navFooter');
+
+  if (n === 0 || n === 5) {
+    stepsBar.style.display = 'none';
+    navFooter.style.display = 'none';
+    return;
+  }
+
+  stepsBar.style.display = 'flex';
+  navFooter.style.display = 'none'; // כפתורים בתוך הסקשן עצמו
+  // הצג כפתור זכוכית מגדלת
+  document.getElementById('searchToggleBtn').style.display = 'flex';
+
+  // update steps
+  // stepMap: sec1=פרטים, sec2=שאלון, sec3=בני בית, sec4=אישור
+  const stepMap = [null,'step1item','step2item','step3item','step4item'];
+  [1,2,3,4].forEach(i => {
+    const el = document.getElementById(stepMap[i]);
+    if (!el) return;
+    el.classList.remove('active','done');
+    if (i === n) el.classList.add('active');
+    else if (i < n) el.classList.add('done');
+  });
+
+  // update nav buttons
+  document.getElementById('btnBack').style.display = n === 1 ? 'none' : 'flex';
+  const btnNext = document.getElementById('btnNext');
+  if (n === 4) { btnNext.style.display = 'none'; }
+  else { btnNext.style.display = 'flex'; btnNext.textContent = 'המשך ←'; }
+
+  window.scrollTo(0, 0);
+}
+
+function goNext() {
+  const n = state.currentSection;
+  if (!validateSection(n)) return;
+
+  if (n === 1) {
+    goToSection(2);
+  } else if (n === 2) {
+    buildHousematesSection();
+    goToSection(3);
+  } else if (n === 3) {
+    buildSummary();
+    goToSection(4);
+  }
+}
+
+function goBack() {
+  const n = state.currentSection;
+  if (n > 1) goToSection(n - 1);
+  else goToSection(0);
+}
+
+// ===== זכוכית מגדלת — חיפוש מהיר =====
+function toggleSearchBar() {
+  const panel = document.getElementById('searchPanel');
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) {
+    setTimeout(() => document.getElementById('quickSearchID')?.focus(), 100);
+  }
+}
+
+async function quickSearch() {
+  const id = document.getElementById('quickSearchID').value.trim();
+  if (!id || id.length < 5) {
+    showToast('נא להזין תעודת זהות תקינה', 'error');
+    return;
+  }
+  // הסתר פאנל חיפוש
+  document.getElementById('searchPanel').style.display = 'none';
+  document.getElementById('quickSearchID').value = '';
+  // שים ב-searchID והפעל חיפוש
+  document.getElementById('searchID').value = id;
+  searchResident();
+}
+
+// ===== אזהרת שדות חסרים =====
+function getEmptyFields(sec) {
+  const emptyFields = [];
+  if (sec === 1) {
+    const optional = [
+      { id: 'phone1', label: 'טלפון 1' },
+      { id: 'phone2', label: 'טלפון 2' },
+      { id: 'email', label: 'אימייל' },
+      { id: 'age', label: 'גיל' },
+      { id: 'gender', label: 'מגדר' },
+      { id: 'totalChildren', label: 'מס׳ ילדים' },
+      { id: 'floor', label: 'קומה' },
+      { id: 'apartmentNumber', label: 'דירה' },
+    ];
+    optional.forEach(f => {
+      const el = document.getElementById(f.id);
+      if (el && !el.value.trim()) emptyFields.push(f.label);
+    });
+  } else if (sec === 2) {
+    if (!getRadioValue('locationGroup')) emptyFields.push('סטטוס מיקום');
+    if (!getRadioValue('healthStatusGroup')) emptyFields.push('סטטוס בריאות');
+    if (!getRadioValue('damageGroup')) emptyFields.push('מידת הפגיעה');
+    if (!getRadioValue('healthFundGroup')) emptyFields.push('קופ"ח');
+    if (!getRadioValue('medicalGroup')) emptyFields.push('צורך רפואי');
+    if (!getRadioValue('housingGroup')) emptyFields.push('עזרה בשהייה');
+  }
+  return emptyFields;
+}
+
+function goNextWithWarning(sec) {
+  // בדיקת חובה תחילה
+  if (!validateSection(sec)) return;
+  
+  const empty = getEmptyFields(sec);
+  if (empty.length > 0) {
+    showIncompleteDialog(empty, sec);
+  } else {
+    goNext();
+  }
+}
+
+function showIncompleteDialog(fields, sec) {
+  const overlay = document.getElementById('incompleteOverlay');
+  const list = document.getElementById('incompleteList');
+  list.innerHTML = fields.map(f => `<div style="
+    padding:8px 12px; margin-bottom:6px;
+    background:#fff8e1; border-radius:8px;
+    border-right:3px solid #ffc107;
+    font-size:14px; color:#555;
+  ">⚠️ ${f}</div>`).join('');
+  overlay.style.display = 'flex';
+  overlay._sec = sec;
+}
+
+function continueAnyway() {
+  document.getElementById('incompleteOverlay').style.display = 'none';
+  goNext();
+}
+
+function backToForm() {
+  document.getElementById('incompleteOverlay').style.display = 'none';
+}
+
+function resetAll() {
+  state = { currentSection: 0, isNew: false, record: null, housemates: [], houseMemberAnswers: {} };
+  clearForm();
+  document.getElementById('searchID').value = '';
+  document.querySelectorAll('.radio-item').forEach(r => r.classList.remove('selected'));
+  document.querySelectorAll('.confirm-item').forEach(c => {
+    c.classList.remove('checked');
+    const check = c.querySelector('.confirm-check');
+    if (check) {
+      check.textContent = '';
+      check.style.background = '';
+      check.style.borderColor = '';
+      check.style.color = '';
+    }
+  });
+  goToSection(0);
+}
+
+// =============================================
+// UI HELPERS
+// =============================================
+function showLoading(text) {
+  document.getElementById('loadingText').textContent = text || 'טוען...';
+  document.getElementById('loadingOverlay').classList.add('show');
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('show');
+}
+
+let toastTimer;
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
+  /* ===== SEARCH SCREEN ===== */
+  .search-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    margin-top: 8px;
+  }
+  .search-icon { font-size: 48px; margin-bottom: 12px; }
+  .search-card h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .search-card p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
+
+  .id-input-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .id-input-wrap input {
+    width: 100%;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 4px;
+    padding: 18px 16px;
+    border: 2.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Assistant', sans-serif;
+    color: var(--dark);
+    transition: border-color 0.2s;
+    background: var(--light);
+  }
+  .id-input-wrap input:focus {
+    outline: none;
+    border-color: #2B3A8F;
+    background: white;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+  .btn-primary {
+    background: #2B3A8F;
+    color: white;
+  }
+  .btn-primary:active { transform: scale(0.98); background: var(--mid); }
+  .btn-danger {
+    background: #e63946;
+    color: white;
+  }
+  .btn-danger:active { transform: scale(0.98); }
+  .btn-success {
+    background: var(--green);
+    color: white;
+    font-size: 18px;
+    padding: 18px;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--gray);
+  }
+  .btn-sm {
+    width: auto;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* ===== RESIDENT CARD ===== */
+  .resident-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .resident-card-header {
+    background: linear-gradient(135deg, #2B3A8F, #1a2970);
+    color: white;
+    padding: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .resident-avatar {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 800;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .resident-name { font-size: 18px; font-weight: 800; }
+  .resident-id { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+  .resident-status-row {
+    padding: 10px 16px;
+    background: var(--light);
+    display: flex; gap: 8px; align-items: center;
+  }
+  .status-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 12px; font-weight: 600;
+  }
+  .chip-new { background: #fef3c7; color: #92400e; }
+  .chip-found { background: #d1fae5; color: #065f46; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== FORM FIELDS ===== */
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+  .field label .req { color: var(--red); margin-right: 2px; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    color: var(--dark);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: #2B3A8F;
+    box-shadow: 0 0 0 3px rgba(43,58,143,0.12);
+  }
+  .field input.prefilled {
+    background: #eef2ff;
+    border-color: #93a8e8;
+    color: #2B3A8F;
+    font-weight: 600;
+  }
+  .field textarea { resize: none; min-height: 80px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field-row-3 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; }
+
+  /* ===== RADIO GROUPS ===== */
+  .radio-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-group.horizontal { flex-direction: row; flex-wrap: wrap; }
+  .radio-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .radio-item:active { transform: scale(0.99); }
+  .radio-item input[type=radio] { display: none; }
+  .radio-dot {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .radio-item.selected {
+    border-color: #2B3A8F;
+    background: var(--light);
+  }
+  .radio-item.selected .radio-dot {
+    border-color: #2B3A8F;
+    background: #2B3A8F;
+    box-shadow: inset 0 0 0 3px white;
+  }
+  .radio-group.horizontal .radio-item {
+    flex: 1; min-width: 80px;
+    flex-direction: column; gap: 6px;
+    text-align: center; padding: 12px 8px;
+    font-size: 13px;
+  }
+  .radio-group.horizontal .radio-dot { margin: 0 auto; }
+
+  /* ===== CONFIRM CHECKBOX ===== */
+  .confirm-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: all 0.15s;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .confirm-item input[type=checkbox] { display: none; }
+  .confirm-check {
+    width: 22px; height: 22px; min-width: 22px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; transition: all 0.15s;
+  }
+  .confirm-item.checked { border-color: var(--green); background: #f0fdf4; }
+  .confirm-item.checked .confirm-check { background: var(--green); border-color: var(--green); color: white; }
+
+  /* ===== NEIGHBORS SECTION ===== */
+  .housemates-banner {
+    background: linear-gradient(135deg, #2B3A8F, #1a2970);
+    color: white;
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .housemates-banner-icon { font-size: 28px; flex-shrink: 0; }
+  .housemates-banner h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+  .housemates-banner p { font-size: 13px; opacity: 0.8; }
+
+  .houseMember-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .houseMember-card.answered { border-color: var(--green); }
+  .houseMember-card-header {
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    background: var(--light);
+    cursor: pointer;
+  }
+  .houseMember-avatar {
+    width: 38px; height: 38px;
+    background: #2B3A8F;
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .houseMember-name { font-size: 15px; font-weight: 700; }
+  .houseMember-id { font-size: 12px; color: var(--gray); }
+  .houseMember-expand {
+    margin-right: auto;
+    font-size: 18px;
+    color: var(--gray);
+    transition: transform 0.2s;
+  }
+  .houseMember-card.open .houseMember-expand { transform: rotate(180deg); }
+  .houseMember-body { display: none; padding: 16px; }
+  .houseMember-card.open .houseMember-body { display: block; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px);
+    background: #2B3A8F; color: white;
+    padding: 14px 22px;
+    border-radius: 30px;
+    font-size: 14px; font-weight: 600;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.error { background: #e63946; }
+  .toast.success { background: var(--green); }
+
+  /* ===== LOADING ===== */
+  .loading-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(26,26,46,0.7);
+    z-index: 500;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
+  }
+  .loading-overlay.show { display: flex; }
+  .spinner {
+    width: 44px; height: 44px;
+    border: 4px solid rgba(255,255,255,0.2);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { color: white; font-size: 16px; font-weight: 600; }
+
+  /* ===== NAV FOOTER ===== */
+  .nav-footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex; gap: 10px;
+    z-index: 99;
+  }
+  .nav-footer .btn { flex: 1; padding: 14px; }
+
+  /* SUCCESS SCREEN */
+  .success-screen {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .success-icon { font-size: 64px; margin-bottom: 16px; animation: bounce 0.6s ease; }
+  @keyframes bounce { 0%{transform:scale(0)} 60%{transform:scale(1.2)} 100%{transform:scale(1)} }
+  @keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-10px)}
+    40%{transform:translateX(10px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
+  }
+  .success-screen h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+  .success-screen p { font-size: 15px; color: var(--gray); margin-bottom: 28px; }
+  .summary-box {
+    background: var(--light);
+    border-radius: var(--radius);
+    padding: 18px;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  .summary-row {
+    display: flex; justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-row:last-child { border: none; }
+  .summary-row strong { color: var(--dark); }
+
+  /* Spacer for fixed footer */
+  .footer-spacer { height: 80px; }
+
+  /* כפתורי ניווט */
+  .nav-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .nav-buttons .btn {
+    margin: 0 !important;
+    width: auto !important;
+  }
+  .nav-buttons .btn-back {
+    flex: 0 0 80px !important;
+    padding: 16px 12px !important;
+    font-size: 14px !important;
+  }
+  .nav-buttons .btn-next {
+    flex: 1 1 auto !important;
+    padding: 16px !important;
+    font-size: 16px !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- ======= LOGIN SCREEN ======= -->
+<div id="loginScreen" style="
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  min-height:100vh; background:#2B3A8F;
+  padding:24px;
+">
+  <div id="loginCard" style="
+    background:#1a2970;
+    border-radius:20px;
+    padding:36px 28px;
+    width:100%; max-width:360px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    border:1px solid rgba(255,255,255,0.08);
+  ">
+    <div style="font-size:52px; margin-bottom:16px">🔐</div>
+    <h1 style="color:white; font-size:22px; font-weight:800; margin-bottom:8px; font-family:'Assistant',sans-serif">
+      מערכת חירום — שטח
+    </h1>
+    <p style="color:rgba(255,255,255,0.55); font-size:14px; margin-bottom:28px; font-family:'Assistant',sans-serif; line-height:1.5">
+      הכנס את קוד הגישה שקיבלת<br>מהמוקדן כדי להמשיך
+    </p>
+    <input
+      id="accessCodeInput"
+      type="password"
+      inputmode="numeric"
+      placeholder="קוד גישה"
+      autocomplete="off"
+      style="
+        width:100%;
+        padding:16px;
+        font-size:22px;
+        font-weight:700;
+        text-align:center;
+        letter-spacing:6px;
+        background:rgba(255,255,255,0.07);
+        border:2px solid rgba(255,255,255,0.15);
+        border-radius:12px;
+        color:white;
+        font-family:'Assistant',sans-serif;
+        margin-bottom:12px;
+        transition:border-color 0.2s;
+        outline:none;
+      "
+      onfocus="this.style.borderColor='rgba(255,255,255,0.5)'"
+      onblur="this.style.borderColor='rgba(255,255,255,0.15)'"
+    />
+    <div id="loginError" style="
+      display:none;
+      color:#ff6b6b;
+      font-size:13px;
+      font-family:'Assistant',sans-serif;
+      font-weight:600;
+      margin-bottom:12px;
+      padding:10px;
+      background:rgba(192,57,43,0.2);
+      border-radius:8px;
+      border:1px solid rgba(192,57,43,0.3);
+    "></div>
+    <button
+      id="btnLogin"
+      onclick="submitAccessCode()"
+      style="
+        width:100%;
+        padding:16px;
+        background:#2B3A8F;
+        color:white;
+        border:none;
+        border-radius:12px;
+        font-size:16px;
+        font-weight:700;
+        font-family:'Assistant',sans-serif;
+        cursor:pointer;
+        transition:background 0.2s;
+      "
+      onmousedown="this.style.background='#1a2970'"
+      onmouseup="this.style.background='#2B3A8F'"
+    >כניסה למערכת ←</button>
+    <p style="color:rgba(255,255,255,0.25); font-size:11px; margin-top:20px; font-family:'Assistant',sans-serif">
+      עיריית לוד — מערכת ניהול חירום
+    </p>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-icon">🚨</div>
+    <div>
+      <h1>טופס איסוף מידע שטח</h1>
+      <p>עיריית לוד — מערכת חירום</p>
+    </div>
+  </div>
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-top:10px">
+    <div class="event-badge">
+      <div class="event-dot"></div>
+      <span id="eventLabel">טוען אירוע...</span>
+    </div>
+    <button id="searchToggleBtn" onclick="toggleSearchBar()" style="
+      display:none;
+      background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25);
+      border-radius:20px;
+      color:white;
+      padding:6px 14px;
+      font-size:13px;
+      font-family:'Assistant',sans-serif;
+      cursor:pointer;
+      display:flex; align-items:center; gap:6px;
+    " title="חיפוש תושב חדש">
+      🔍 <span id="currentResidentName">חיפוש תושב</span>
+    </button>
+  </div>
+  
+  <!-- פאנל חיפוש מתקפל -->
+  <div id="searchPanel" style="
+    display:none;
+    padding:12px 0 4px;
+    animation: fadeIn 0.2s ease;
+  ">
+    <div style="display:flex; gap:8px;">
+      <input type="number" id="quickSearchID" placeholder="הכנס ת&quot;ז..." 
+        inputmode="numeric" maxlength="9"
+        oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
+        onkeydown="if(event.key==='Enter') quickSearch()"
+        style="
+          flex:1; padding:10px 14px;
+          background:rgba(255,255,255,0.1);
+          border:1.5px solid rgba(255,255,255,0.3);
+          border-radius:10px; color:white;
+          font-size:16px; font-family:'Assistant',sans-serif;
+          outline:none;
+        "/>
+      <button onclick="quickSearch()" style="
+        background:white; color:#2B3A8F;
+        border:none; border-radius:10px;
+        padding:10px 16px; font-weight:700;
+        font-family:'Assistant',sans-serif;
+        font-size:14px; cursor:pointer;
+      ">חפש</button>
+      <button onclick="toggleSearchBar()" style="
+        background:rgba(255,255,255,0.1);
+        border:1px solid rgba(255,255,255,0.2);
+        border-radius:10px; color:white;
+        padding:10px 12px; cursor:pointer;
+        font-size:16px;
+      ">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEPS BAR -->
+<div class="steps-bar" id="stepsBar" style="display:none">
   <div class="step-item active" id="step1item">
     <div class="step-num">1</div> חיפוש
   </div>
