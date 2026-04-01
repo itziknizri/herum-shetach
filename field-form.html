@@ -1045,12 +1045,11 @@ async function searchHousemates() {
     const data = await res.json();
     if (data.neighbors) {
       state.housemates = data.neighbors.map(n => ({
-        recordId: n['new_individualdemographicrecordid'] || '',
-        fullName: n['new_fullname'] || 'לא ידוע',
-        identityNumber: n['new_identitynumber'] || '',
-        locationStatus: n['cr908_new_locationstatus@OData.Community.Display.V1.FormattedValue'] || '',
-        healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || ''
-      }));
+  recordId: n.recordId || '',
+  fullName: n.fullName || 'לא ידוע',
+  locationStatus: n.locationStatus || '',
+  healthStatus: n.healthStatus || ''
+}));
     } else {
       state.housemates = [];
     }
