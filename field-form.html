@@ -1077,6 +1077,7 @@ function fillFormFromRecord(r) {
     if (val) el.classList.add('prefilled'); else el.classList.remove('prefilled');
   };
 
+  // שם
   if (r.firstName && r.lastName) {
     prefill('firstName', r.firstName);
     prefill('lastName', r.lastName);
@@ -1086,19 +1087,40 @@ function fillFormFromRecord(r) {
     prefill('lastName', parts.slice(1).join(' ') || '');
   }
 
-  prefill('identityNumber', r.identityNumber || r.new_identitynumber || state.record?.identityNumber);
+  // פרטים אישיים
+  prefill('identityNumber', r.identityNumber || r.new_identitynumber || '');
   prefill('phone1', r.primaryPhone || r.new_primaryphone || '');
   prefill('phone2', r.secondaryPhone || r.new_secondaryphone || '');
   prefill('email', r.emailAddress || r.new_emailaddress || '');
+  prefill('age', r.age || r.new_age || '');
+  prefill('gender', r.gender || r.new_gender || '');
+  prefill('totalChildren', r.totalChildren || r.new_totalchildren || '');
+
+  // כתובת
   prefill('streetName', r.streetName || r.new_streetname || '');
   prefill('houseNumber', r.houseNumber || r.new_housenumber || '');
   prefill('floor', r.floor !== undefined ? r.floor : (r.new_floor !== undefined ? r.new_floor : ''));
   prefill('apartmentNumber', r.apartmentNumber || r.new_apartmentnumber || '');
-  prefill('age', r.age || r.new_age || '');
-  prefill('gender', r.gender || r.new_gender || '');
-  prefill('totalChildren', r.totalChildren || r.new_totalchildren || '');
-  prefill('notes', r.notes || r.new_notes || '');
 
+  // שאלון — טקסט
+  prefill('notes', r.notes || r.new_notes || '');
+  prefill('interviewerName', r.interviewerName || r.cr908_new_interviewername || '');
+  prefill('evacuatedPersons', r.evacuatedPersons || r.cr908_new_evacuatedpersons || '');
+  prefill('missingPersons', r.missingPersons || r.cr908_new_missingpersons || '');
+  prefill('pets', r.pets || r.cr908_new_pets || '');
+  prefill('additionalNeeds', r.additionalNeeds || r.cr908_new_additionalneeds || '');
+  prefill('vulnerableHousemates', r.vulnerableHousemates || r.cr908_new_vulnerableneighbors || '');
+  prefill('houseMemberDistress', r.housemateDistress || r.cr908_new_neighbordistress || '');
+
+  // שאלון — שאלות בחירה
+  if (r.locationStatus) selectRadioByValue('locationGroup', r.locationStatus);
+  if (r.healthStatus) selectRadioByValue('healthStatusGroup', r.healthStatus);
+  if (r.damageLevel) selectRadioByValue('damageGroup', r.damageLevel);
+  if (r.healthFund) selectRadioByValue('healthFundGroup', r.healthFund);
+  if (r.medicalNeeds) selectRadioByValue('medicalGroup', r.medicalNeeds);
+  if (r.housingAssistance) selectRadioByValue('housingGroup', r.housingAssistance);
+
+  // עדכון כרטיס תושב וכפתור חיפוש
   updateResidentCard(r, false);
   const resName = r.fullName || ((r.firstName||'') + ' ' + (r.lastName||'')) || 'תושב';
   const nameEl = document.getElementById('currentResidentName');
@@ -1115,6 +1137,30 @@ function clearForm() {
   const id = document.getElementById('identityNumber');
   if (id) id.value = '';
   updateResidentCard(null, true);
+}
+
+
+  function selectRadioByValue(groupId, value) {
+  document.querySelectorAll(`#${groupId} .radio-item`).forEach(item => {
+    const input = item.querySelector('input');
+    if (input && input.value === value) {
+      item.classList.add('selected');
+      const dot = item.querySelector('.radio-dot');
+      if (dot) {
+        dot.style.borderColor = '#2B3A8F';
+        dot.style.background = '#2B3A8F';
+        dot.style.boxShadow = 'inset 0 0 0 3px white';
+      }
+    } else {
+      item.classList.remove('selected');
+      const dot = item.querySelector('.radio-dot');
+      if (dot) {
+        dot.style.borderColor = '';
+        dot.style.background = '';
+        dot.style.boxShadow = '';
+      }
+    }
+  });
 }
 
 function updateResidentCard(r, isNew) {
