@@ -1381,7 +1381,7 @@ async function submitAll() {
   const payload = {
     action: state.isNew ? 'create' : 'update',
     eventId: CONFIG.EVENT_ID,
-recordId: state.record?.recordId || state.record?.new_individualdemographicrecordid || '',
+recordId: state.record?.recordId || state.record?.new_individualdemographicrecordid || null,
     identityNumber: document.getElementById('identityNumber').value,
     fullName: (document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim()).trim(),
     primaryPhone: document.getElementById('phone1').value,
