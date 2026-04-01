@@ -1564,6 +1564,22 @@ function goNextWithWarning(sec) {
   }
 }
 
+  function updateIdCounter() {
+  const val = document.getElementById('searchID').value;
+  const remaining = 9 - val.length;
+  const el = document.getElementById('idCounter');
+  if (remaining === 0) {
+    el.textContent = '✅ תעודת זהות מלאה';
+    el.style.color = 'var(--green)';
+  } else if (remaining < 0) {
+    el.textContent = 'יותר מדי ספרות';
+    el.style.color = 'var(--accent)';
+  } else {
+    el.textContent = `נותרו ${remaining} ספרות`;
+    el.style.color = remaining <= 3 ? '#e67e22' : 'var(--gray)';
+  }
+}
+
 function showIncompleteDialog(fields, sec) {
   const overlay = document.getElementById('incompleteOverlay');
   const list = document.getElementById('incompleteList');
