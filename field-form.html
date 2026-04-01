@@ -1027,7 +1027,38 @@ async function searchResident() {
   }
 }
 
-
+async function searchHousemates() {
+  try {
+    const res = await fetch(CONFIG.SEARCH_FLOW_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        accessCode: CONFIG.ACCESS_CODE,
+        action: 'search',
+        identityNumber: document.getElementById('identityNumber').value,
+        eventId: CONFIG.EVENT_ID,
+        streetName: document.getElementById('streetName').value,
+        houseNumber: document.getElementById('houseNumber').value,
+        apartmentNumber: document.getElementById('apartmentNumber').value
+      })
+    });
+    const data = await res.json();
+    if (data.neighbors) {
+      state.housemates = data.neighbors.map(n => ({
+        recordId: n['new_individualdemographicrecordid'] || '',
+        fullName: n['new_fullname'] || 'לא ידוע',
+        identityNumber: n['new_identitynumber'] || '',
+        locationStatus: n['cr908_new_locationstatus@OData.Community.Display.V1.FormattedValue'] || '',
+        healthStatus: n['cr908_new_healthstatus@OData.Community.Display.V1.FormattedValue'] || ''
+      }));
+    } else {
+      state.housemates = [];
+    }
+  } catch(e) {
+    state.housemates = [];
+    showToast('שגיאה בחיפוש בני בית', 'error');
+  }
+}
 
 function newResident() {
   state.record = null;
@@ -1236,7 +1267,7 @@ function buildHousematesSection() {
   state.housemates.forEach((n, i) => {
     const id = n.recordId || i;
     const name = n.fullName || 'לא ידוע';
-    const initials = name.split(' ').map(w=>w[0]).filter(Boolean).slice(0,2).join('');
+    const initials = name.split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('');
     const idNum = n.identityNumber || '';
 
     const div = document.createElement('div');
@@ -1267,7 +1298,7 @@ function buildHousematesSection() {
           <select id="nHealth_${i}">
             <option value="">לא ידוע</option>
             <option value="בריא">בריא</option>
-            <option value="פצוע">פצוע</option>
+            <option value="נפצע">נפצע</option>
             <option value="פונה">פונה</option>
             <option value="נפטר">נפטר</option>
           </select>
@@ -1280,6 +1311,12 @@ function buildHousematesSection() {
       </div>
     `;
     list.appendChild(div);
+
+    // ✅ מלא ערכים קיימים
+    const locEl = document.getElementById(`nLocation_${i}`);
+    const hlEl = document.getElementById(`nHealth_${i}`);
+    if (locEl && n.locationStatus) locEl.value = n.locationStatus;
+    if (hlEl && n.healthStatus) hlEl.value = n.healthStatus;
   });
 }
 
@@ -1435,10 +1472,13 @@ function goToSection(n) {
   window.scrollTo(0, 0);
 }
 
-function goNext() {
+async function goNext() {
   const n = state.currentSection;
   if (!validateSection(n)) return;
   if (n === 1) {
+    showLoading('מחפש בני בית...');
+    await searchHousemates();
+    hideLoading();
     goToSection(2);
   } else if (n === 2) {
     buildHousematesSection();
