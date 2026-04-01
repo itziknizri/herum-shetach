@@ -1116,7 +1116,7 @@ function clearForm() {
   function selectRadioByValue(groupId, value) {
   document.querySelectorAll(`#${groupId} .radio-item`).forEach(item => {
     const input = item.querySelector('input');
-    if (input && input.value === value) {
+      if (input && input.value === value.trim()) {
       item.classList.add('selected');
       const dot = item.querySelector('.radio-dot');
       if (dot) {
