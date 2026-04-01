@@ -455,11 +455,19 @@
     <div class="search-icon">🔍</div>
     <h2>חיפוש תושב</h2>
     <p>הכנס תעודת זהות של התושב כדי לאחזר את פרטיו מהמערכת</p>
-    <div class="id-input-wrap">
-      <input type="number" id="searchID" placeholder="000000000" inputmode="numeric"
-             oninput="if(this.value.length>9)this.value=this.value.slice(0,9)"
-             onkeydown="if(event.key==='Enter') searchResident()"/>
-    </div>
+  <div class="id-input-wrap">
+  <input type="number" id="searchID" placeholder="000000000" inputmode="numeric"
+         oninput="if(this.value.length>9)this.value=this.value.slice(0,9); updateIdCounter()"
+         onkeydown="if(event.key==='Enter') searchResident()"/>
+  <div id="idCounter" style="
+    text-align:center;
+    font-size:13px;
+    color:var(--gray);
+    margin-top:6px;
+    font-weight:600;
+    transition: color 0.2s;
+  ">נותרו 9 ספרות</div>
+</div> 
     <button class="btn btn-primary" onclick="searchResident()">🔍 חפש תושב</button>
     <div id="notFoundMsg" style="display:none;margin-top:16px">
       <div style="background:#fff8e1;border:1.5px solid #ffe082;border-radius:10px;padding:14px;
